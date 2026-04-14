@@ -125,7 +125,7 @@ python 05_publication_figures.py
 
 ```bibtex
 @unpublished{gomez_mino2026legibility,
-  author = {Gomez, Raimundo Elias and Mi{\~n}o, Mar{\'i}a Gabriela},
+  author = {Gomez, Raimundo Elias and Miño, María Gabriela},
   title = {What the state can read: organisational simplification in {Argentina}'s federal system, 1901--2025},
   year = {2026},
   note = {Manuscript under review}
