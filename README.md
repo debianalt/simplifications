@@ -1,8 +1,12 @@
 # What the state can read: organisational simplification in Argentina's federal system, 1901-2025
 
 **Raimundo Elias Gomez**
-CONICET - FHyCS, Universidad Nacional de Misiones, Argentina
+CONICET / FHyCS, Universidad Nacional de Misiones, Argentina
 ORCID: [0000-0002-4468-9618](https://orcid.org/0000-0002-4468-9618)
+
+**María Gabriela Miño**
+CONICET / FHyCS, Universidad Nacional de Misiones, Argentina
+ORCID: [0000-0002-5057-5158](https://orcid.org/0000-0002-5057-5158)
 
 ## Overview
 
@@ -120,11 +124,11 @@ python 05_publication_figures.py
 ## Citation
 
 ```bibtex
-@unpublished{gomez2026differential,
-  author = {Gomez, Raimundo Elias},
+@unpublished{gomez_mino2026legibility,
+  author = {Gomez, Raimundo Elias and Mi{\~n}o, Mar{\'i}a Gabriela},
   title = {What the state can read: organisational simplification in {Argentina}'s federal system, 1901--2025},
   year = {2026},
-  note = {Working paper}
+  note = {Manuscript under review}
 }
 ```
 
