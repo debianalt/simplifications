@@ -7,7 +7,8 @@ The primary dataset is the **National Company Registry** (*Registro Nacional de 
 - **URL**: https://datos.gob.ar/dataset/justicia-registro-nacional-sociedades
 - **Download date**: 23 February 2026
 - **Raw file**: `registro-nacional-sociedades-20260223.csv` (3,050,044 rows)
-- **After deduplication**: *N* = 1,211,424 unique organisations (1901-2025)
+- **After deduplication by tax identifier**: 1,245,492 unique organisations
+- **After exclusions**: *N* = 1,210,044 organisations founded between 1901 and 2025
 
 The raw file is not included in this repository due to size. Download it from the URL above and place it in this directory before running `scripts/00_build_national_dataset.py`.
 
@@ -22,4 +23,4 @@ The raw file is not included in this repository due to size. Download it from th
 
 ## Processed outputs
 
-The `tables/` directory contains all intermediate and final outputs produced by the analytical pipeline. These tables are sufficient to reproduce the figures without re-running the full pipeline.
+The `salidas/` directory contains every output produced by the analytical pipeline, as CSV, plus the supplementary tables in markdown under `salidas/cuadros/`. They are sufficient to reproduce the figures without re-running the full pipeline.

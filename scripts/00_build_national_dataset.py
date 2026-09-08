@@ -32,6 +32,10 @@ TAB_DIR.mkdir(exist_ok=True)
 
 REGISTRY = Path(r"C:\Users\ant\OneDrive\gee\arca\data\registro-nacional-sociedades-20260223.csv")
 
+# Study window (inclusive). Reported in the manuscript as 1901-2025.
+YEAR_MIN = 1901
+YEAR_MAX = 2025
+
 
 # ── Classification functions (replicated from 2026_11/acm/03_run_acm.py) ────
 
@@ -244,6 +248,15 @@ def main():
 
     # Tipo
     df["tipo"] = df["tipo_societario"].map(classify_tipo)
+
+    # Sociedad de la Seccion IV de la Ley General de Sociedades. La reforma de
+    # 2015 incorporo esta forma residual, que concentra su aparicion en
+    # 2016-2019 e infla el denominador justo en la era donde la participacion
+    # asociativa se hunde. classify_tipo la funde en "Otra", asi que la marca se
+    # guarda aparte: sin ella habria que releer el CSV crudo en cada analisis.
+    df["seccion_iv"] = (df["tipo_societario"].astype(str)
+                        .str.contains("SECCION IV", na=False))
+    print(f"  Seccion IV flagged: {int(df['seccion_iv'].sum()):,}")
     print(f"  Tipo distribution:")
     for t, n in df["tipo"].value_counts().items():
         print(f"    {t:8s}: {n:>9,} ({n / len(df) * 100:5.1f}%)")
@@ -272,6 +285,18 @@ def main():
     df = df[df["era"] != "unknown"]
     print(f"  Excluded unknown era: {n_before - len(df):,}")
 
+    # Restrict to the study window. The registry carries impossible founding
+    # years (2199-2201) and post-download years; political_era() has no upper
+    # bound, so anything from 2024 on lands in "milei" and anything up to 1989
+    # in "pre1990". Enforcing the window here keeps every downstream script on
+    # the same N and makes the exclusion chain traceable.
+    n_before = len(df)
+    n_early = int((df["year"] < YEAR_MIN).sum())
+    n_late = int((df["year"] > YEAR_MAX).sum())
+    df = df[(df["year"] >= YEAR_MIN) & (df["year"] <= YEAR_MAX)]
+    print(f"  Excluded outside {YEAR_MIN}-{YEAR_MAX}: {n_before - len(df):,} "
+          f"(before {YEAR_MIN}: {n_early:,}; after {YEAR_MAX}: {n_late:,})")
+
     # Merge rare subtipo (<30 obs)
     sub_counts = df["subtipo"].value_counts()
     rare_sub = sub_counts[sub_counts < 30].index
@@ -291,7 +316,7 @@ def main():
 
     out = df[[
         "cuit", "razon_social", "tipo", "subtipo", "era", "estado",
-        "provincia", "prov_type", "clae2", "clae6", "year",
+        "provincia", "prov_type", "clae2", "clae6", "year", "seccion_iv",
     ]].copy()
 
     out.to_parquet(DATA_DIR / "national_orgs_clean.parquet", index=False)

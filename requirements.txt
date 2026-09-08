@@ -1,8 +1,5 @@
+# Dependencias del constructor del dataset (scripts/00_build_national_dataset.py).
+# El analisis corre en R; ver la seccion Requirements del README.
 numpy>=1.24
 pandas>=2.0
-matplotlib>=3.7
-scipy>=1.10
-scikit-learn>=1.2
-prince>=0.13
-adjustText>=1.0
 pyarrow>=12.0

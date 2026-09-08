@@ -29,3 +29,7 @@ Thumbs.db
 # Data (raw sources — too large for git)
 data/*.parquet
 data/*.csv.gz
+
+# Claves API locales
+.env
+*.env
