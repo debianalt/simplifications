@@ -180,10 +180,10 @@ p2 <- ggplot() +
             hjust = -0.08, size = 2.5, fontface = "bold", show.legend = FALSE) +
   facet_wrap(~panel, ncol = 3) +
   scale_colour_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                      labels = TIPO_PROV_ETIQUETA) +
+                      labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
   scale_linetype_manual(values = c(metropolitan = "solid", intermediate = "dashed",
                                    peripheral = "dotdash"),
-                        name = "Tipo de provincia", labels = TIPO_PROV_ETIQUETA) +
+                        name = "Tipo de provincia", labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
   labs(x = sprintf("Eje 1 (%s%% de la inercia)  →  polo comercial", dec(pct1, 0)),
        y = sprintf("Eje 2 (%s%% de la inercia)  →  polo cooperativo", dec(pct2, 0))) +
   coord_fixed() +
@@ -284,7 +284,7 @@ p5 <- ggplot(ss, aes(diferencial_provincial, provincia, fill = prov_type)) +
   geom_col(width = 0.72) +
   facet_wrap(~panel, ncol = 2) +
   scale_fill_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                    labels = TIPO_PROV_ETIQUETA) +
+                    labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
   scale_x_continuous(labels = function(x) format(x, big.mark = ".", scientific = FALSE)) +
   labs(x = "Diferencial provincial (organizaciones por año)", y = NULL) +
   tema_es(10) +
@@ -306,7 +306,7 @@ specs <- list(
   list("pda_per_100k", "shannon_H_milei",
        "Acceso financiero (puntos por 100.000 hab.)", "Shannon H (era Milei)"),
   list("hhi_empleo", "shannon_H_milei",
-       "Concentración del empleo (HHI)", "Shannon H (era Milei)"),
+       "Concentración del empleo (Herfindahl)", "Shannon H (era Milei)"),
   list("pct_with_account", "sas_share_milei",
        "% de adultos con cuenta bancaria", "Participación SAS (era Milei)"),
   list("pda_per_100k", "provincial_diff",
@@ -319,7 +319,7 @@ paneles <- lapply(specs, function(s) {
     geom_text_repel(aes(label = etq), size = 2.2, show.legend = FALSE,
                     max.overlaps = 30, seed = SEMILLA, segment.size = 0.2) +
     scale_colour_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                        labels = TIPO_PROV_ETIQUETA) +
+                        labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
     labs(x = s[[3]], y = s[[4]]) +
     tema_es(9)
 })

@@ -12,7 +12,7 @@ ORCID: [0000-0002-5057-5158](https://orcid.org/0000-0002-5057-5158)
 
 This repository contains the replication materials for a study on the spatially uneven effects of Argentina's *Sociedades por Acciones Simplificadas* law (2017) and Milei-era deregulation on organisational diversity across the country's 24 subnational jurisdictions (23 provinces and the Autonomous City of Buenos Aires). Drawing on the complete National Company Registry (*N* = 1,210,044 unique organisations, 1901-2025), the study develops the concept of *fractured legibility* and applies three complementary decompositions: a correspondence analysis of the space of legal forms, a Theil decomposition of the concentration of provincial compositions, and a shift-share analysis of creation rates.
 
-The central claim is that a nominally uniform national reform is registered through twenty-four provincial registries whose conduct decides how far it reaches. The simplified form accounts for 83.4% of new registrations in one jurisdiction and 5.1% in another, and in the capital its uptake tracks, year by year, the requirements its own registry imposed between 2020 and 2023 and repealed in April 2024.
+The central claim is that a nominally uniform national reform is registered through twenty-four registries, twenty-three provincial and, in the capital, a national organ acting as the local registry, whose conduct decides how far it reaches. The simplified form accounts for 83.4% of new registrations in one jurisdiction and 5.1% in another, and in the capital its uptake tracks, year by year, the requirements its own registry imposed between 2020 and 2023 and repealed in April 2024.
 
 ## Repository structure
 
@@ -72,7 +72,11 @@ The political era and fiscal status are deliberately kept out of the active set.
 | CEP XXI | Formal employment by sector | November 2023 | [datos.produccion.gob.ar](https://datos.produccion.gob.ar) |
 | SAGyP | Agricultural estimates | 2024/2025 | [datos.magyp.gob.ar](https://datos.magyp.gob.ar/dataset/estimaciones-agricolas) |
 | INDEC | National Census | 2022 | [censo.gob.ar](https://censo.gob.ar) |
+| Inspección General de Justicia | Resolución General 9/2020 | March 2020 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/226763/20200316) |
 | Inspección General de Justicia | Resolución General 11/2024 | April 2024 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/305657/20240411) |
+| INAES | Resolución 1000/2021 | August 2021 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/248024/20210812) |
+| INAES | Resolución 2867/2024 | December 2024 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/318056/20241212) |
+| DPPJ, Provincia de Buenos Aires | Disposición 49/2024 | June 2024 | [gba.gob.ar](https://www.gba.gob.ar/dppj/sociedades_por_acciones_simplificadas_sas) |
 
 ## Analytical pipeline
 
@@ -118,7 +122,8 @@ Rscript R/06_figuras.R
 - Between the Kirchner years and the Milei era the share of associative forms among new registrations falls from 17.6% to 7.9%, and to 9.1% when the era is restricted to 2024 to guard against registration lag. The fall is in the numerator: 4,854 associative registrations per year against 2,568, while total registrations grow 19%.
 - The between-jurisdiction component of the Theil decomposition rises from 9.1% in the 1990s to 44.0% under Fernández, then falls to 31.6% under Milei. It falls because the common component grows, not because jurisdictions converge: their divergence holds at 0.290 against 0.278 while the national composition concentrates from 0.369 to 0.601.
 - The separation between metropolitan and peripheral subcloud centroids grows from 0.59 to 0.79 standard deviations of the cloud between the 1990s and Fernández, and collapses to 0.30 under Milei.
-- The simplified form accounts for 83.4% of new registrations in Mendoza and 5.1% in Buenos Aires province, and exceeds half in eleven of the twenty-four jurisdictions. In the Autonomous City of Buenos Aires it falls from 37.9% in 2019 to 1.2% in 2023 while its registry adds requirements, and recovers to 21.0% in 2025 after they are repealed.
+- The simplified form accounts for 83.4% of new registrations in Mendoza and 5.1% in Buenos Aires province, and exceeds half in eleven of the twenty-four jurisdictions. In the Autonomous City of Buenos Aires it falls from 37.9% in 2019 to 1.2% in 2023 while its registry adds requirements, and recovers to 21.0% in 2025 after they are repealed. Buenos Aires province falls in parallel without an equivalent normative sequence; in June 2024 its registry added the seat and digital-book requirements the capital had just repealed while opening a new digital channel, and its recovery is weaker (6.9% in 2025 against 21.0% in the capital).
+- The associative threshold itself moved within the window: INAES lowered the minimum for worker cooperatives from six to three members between August 2021 and December 2024. The 2022-2023 peak of associative registrations coincides with the lower threshold; the 2024 fall precedes its repeal.
 - Accumulated cooperative density before the reform does not predict associative retention (*r* = 0.14, 95% CI −0.28 to 0.51, *N* = 24). With twenty-four units the interval is too wide to separate a small effect from its absence.
 - Under Milei the most diverse jurisdiction more than doubles the least diverse (Entre Ríos 1.61, 95% CI 1.56 to 1.66; Mendoza 0.69, 95% CI 0.65 to 0.72). Twenty-two of the twenty-three adjacent pairs overlap, so only contrasts between extremes are interpretable.
 
