@@ -1,0 +1,185 @@
+"provincia","prov_type","tipo","n","pct"
+"Buenos Aires","metropolitan","Asoc",1298,9.31601234479294
+"Buenos Aires","metropolitan","Coop",345,2.47613579272231
+"Buenos Aires","metropolitan","Fund",48,0.344505849422235
+"Buenos Aires","metropolitan","Mutual",13,0.0933036675518553
+"Buenos Aires","metropolitan","Otra",1696,12.172540012919
+"Buenos Aires","metropolitan","SA",3166,22.7230316514749
+"Buenos Aires","metropolitan","SAS",704,5.05275245819278
+"Buenos Aires","metropolitan","SRL",6663,47.821718222924
+"CABA","metropolitan","Asoc",531,2.50306401433016
+"CABA","metropolitan","Coop",84,0.39596492882059
+"CABA","metropolitan","Fund",69,0.325256905816913
+"CABA","metropolitan","Mutual",12,0.0565664184029415
+"CABA","metropolitan","Otra",324,1.52729329687942
+"CABA","metropolitan","SA",5416,25.5303101725276
+"CABA","metropolitan","SAS",3524,16.6116715376638
+"CABA","metropolitan","SRL",11254,53.0498727255586
+"Catamarca","peripheral","Asoc",7,2.5
+"Catamarca","peripheral","Coop",13,4.64285714285714
+"Catamarca","peripheral","Fund",3,1.07142857142857
+"Catamarca","peripheral","Otra",2,0.714285714285714
+"Catamarca","peripheral","SA",14,5
+"Catamarca","peripheral","SAS",149,53.2142857142857
+"Catamarca","peripheral","SRL",92,32.8571428571429
+"Chaco","peripheral","Asoc",47,6.70470756062767
+"Chaco","peripheral","Coop",3,0.427960057061341
+"Chaco","peripheral","Fund",25,3.56633380884451
+"Chaco","peripheral","Otra",25,3.56633380884451
+"Chaco","peripheral","SA",26,3.70898716119829
+"Chaco","peripheral","SAS",394,56.2054208273894
+"Chaco","peripheral","SRL",181,25.8202567760342
+"Chubut","intermediate","Asoc",54,6.49819494584838
+"Chubut","intermediate","Coop",35,4.21179302045728
+"Chubut","intermediate","Fund",16,1.92539109506619
+"Chubut","intermediate","Mutual",3,0.36101083032491
+"Chubut","intermediate","Otra",52,6.2575210589651
+"Chubut","intermediate","SA",25,3.00842358604091
+"Chubut","intermediate","SAS",380,45.7280385078219
+"Chubut","intermediate","SRL",266,32.0096269554753
+"Córdoba","metropolitan","Asoc",518,5.75491612043106
+"Córdoba","metropolitan","Coop",80,0.888790134429508
+"Córdoba","metropolitan","Fund",238,2.64415064992779
+"Córdoba","metropolitan","Mutual",9,0.0999888901233196
+"Córdoba","metropolitan","Otra",157,1.74425063881791
+"Córdoba","metropolitan","SA",521,5.78824575047217
+"Córdoba","metropolitan","SAS",6842,76.0137762470837
+"Córdoba","metropolitan","SRL",636,7.06588156871459
+"Corrientes","peripheral","Asoc",30,6.26304801670146
+"Corrientes","peripheral","Coop",2,0.417536534446764
+"Corrientes","peripheral","Fund",26,5.42797494780793
+"Corrientes","peripheral","Mutual",1,0.208768267223382
+"Corrientes","peripheral","Otra",21,4.38413361169102
+"Corrientes","peripheral","SA",39,8.1419624217119
+"Corrientes","peripheral","SAS",197,41.1273486430063
+"Corrientes","peripheral","SRL",163,34.0292275574113
+"Entre Ríos","intermediate","Asoc",79,9.54106280193237
+"Entre Ríos","intermediate","Coop",33,3.98550724637681
+"Entre Ríos","intermediate","Fund",13,1.57004830917874
+"Entre Ríos","intermediate","Mutual",3,0.36231884057971
+"Entre Ríos","intermediate","Otra",128,15.4589371980676
+"Entre Ríos","intermediate","SA",49,5.91787439613527
+"Entre Ríos","intermediate","SAS",221,26.6908212560386
+"Entre Ríos","intermediate","SRL",302,36.4734299516908
+"Formosa","peripheral","Asoc",20,8.16326530612245
+"Formosa","peripheral","Coop",48,19.5918367346939
+"Formosa","peripheral","Fund",1,0.408163265306122
+"Formosa","peripheral","Otra",18,7.3469387755102
+"Formosa","peripheral","SA",6,2.44897959183673
+"Formosa","peripheral","SAS",94,38.3673469387755
+"Formosa","peripheral","SRL",58,23.6734693877551
+"Jujuy","peripheral","Asoc",8,1.87793427230047
+"Jujuy","peripheral","Coop",48,11.2676056338028
+"Jujuy","peripheral","Fund",11,2.58215962441315
+"Jujuy","peripheral","Mutual",1,0.234741784037559
+"Jujuy","peripheral","Otra",5,1.17370892018779
+"Jujuy","peripheral","SA",16,3.75586854460094
+"Jujuy","peripheral","SAS",179,42.018779342723
+"Jujuy","peripheral","SRL",158,37.0892018779343
+"La Pampa","intermediate","Asoc",42,9.45945945945946
+"La Pampa","intermediate","Coop",6,1.35135135135135
+"La Pampa","intermediate","Fund",9,2.02702702702703
+"La Pampa","intermediate","Otra",92,20.7207207207207
+"La Pampa","intermediate","SA",12,2.7027027027027
+"La Pampa","intermediate","SAS",186,41.8918918918919
+"La Pampa","intermediate","SRL",97,21.8468468468468
+"La Rioja","peripheral","Asoc",6,3.09278350515464
+"La Rioja","peripheral","Coop",6,3.09278350515464
+"La Rioja","peripheral","Fund",8,4.12371134020619
+"La Rioja","peripheral","Otra",1,0.515463917525773
+"La Rioja","peripheral","SA",19,9.79381443298969
+"La Rioja","peripheral","SAS",66,34.020618556701
+"La Rioja","peripheral","SRL",88,45.360824742268
+"Mendoza","intermediate","Asoc",196,4.70475276044167
+"Mendoza","intermediate","Coop",7,0.168026884301488
+"Mendoza","intermediate","Fund",56,1.34421507441191
+"Mendoza","intermediate","Mutual",3,0.072011521843495
+"Mendoza","intermediate","Otra",28,0.672107537205953
+"Mendoza","intermediate","SA",264,6.33701392222756
+"Mendoza","intermediate","SAS",3475,83.4133461353817
+"Mendoza","intermediate","SRL",137,3.28852616418627
+"Misiones","peripheral","Asoc",15,3.37078651685393
+"Misiones","peripheral","Coop",18,4.04494382022472
+"Misiones","peripheral","Fund",47,10.561797752809
+"Misiones","peripheral","Otra",6,1.34831460674157
+"Misiones","peripheral","SA",27,6.06741573033708
+"Misiones","peripheral","SAS",195,43.8202247191011
+"Misiones","peripheral","SRL",137,30.7865168539326
+"Neuquén","intermediate","Asoc",37,3.36976320582878
+"Neuquén","intermediate","Coop",14,1.27504553734062
+"Neuquén","intermediate","Fund",1,0.0910746812386157
+"Neuquén","intermediate","Mutual",4,0.364298724954463
+"Neuquén","intermediate","Otra",53,4.82695810564663
+"Neuquén","intermediate","SA",27,2.45901639344262
+"Neuquén","intermediate","SAS",665,60.5646630236794
+"Neuquén","intermediate","SRL",297,27.0491803278689
+"Río Negro","intermediate","Asoc",67,6.31479736098021
+"Río Negro","intermediate","Coop",14,1.31950989632422
+"Río Negro","intermediate","Fund",26,2.45051837888784
+"Río Negro","intermediate","Mutual",3,0.282752120640905
+"Río Negro","intermediate","Otra",63,5.937794533459
+"Río Negro","intermediate","SA",9,0.848256361922714
+"Río Negro","intermediate","SAS",763,71.9132893496701
+"Río Negro","intermediate","SRL",116,10.933081998115
+"Salta","intermediate","Asoc",48,3.2967032967033
+"Salta","intermediate","Coop",40,2.74725274725275
+"Salta","intermediate","Fund",67,4.60164835164835
+"Salta","intermediate","Mutual",1,0.0686813186813187
+"Salta","intermediate","Otra",17,1.16758241758242
+"Salta","intermediate","SA",87,5.97527472527473
+"Salta","intermediate","SAS",868,59.6153846153846
+"Salta","intermediate","SRL",328,22.5274725274725
+"San Juan","intermediate","Asoc",9,1.10294117647059
+"San Juan","intermediate","Coop",12,1.47058823529412
+"San Juan","intermediate","Fund",1,0.122549019607843
+"San Juan","intermediate","Otra",3,0.367647058823529
+"San Juan","intermediate","SA",17,2.08333333333333
+"San Juan","intermediate","SAS",649,79.5343137254902
+"San Juan","intermediate","SRL",125,15.3186274509804
+"San Luis","intermediate","Asoc",106,13.2832080200501
+"San Luis","intermediate","Coop",10,1.2531328320802
+"San Luis","intermediate","Fund",28,3.50877192982456
+"San Luis","intermediate","Mutual",1,0.12531328320802
+"San Luis","intermediate","Otra",3,0.37593984962406
+"San Luis","intermediate","SA",17,2.13032581453634
+"San Luis","intermediate","SAS",534,66.9172932330827
+"San Luis","intermediate","SRL",99,12.406015037594
+"Santa Cruz","intermediate","Asoc",20,5.3475935828877
+"Santa Cruz","intermediate","Coop",66,17.6470588235294
+"Santa Cruz","intermediate","Fund",8,2.13903743315508
+"Santa Cruz","intermediate","Otra",9,2.40641711229947
+"Santa Cruz","intermediate","SA",20,5.3475935828877
+"Santa Cruz","intermediate","SAS",177,47.3262032085562
+"Santa Cruz","intermediate","SRL",74,19.7860962566845
+"Santa Fe","metropolitan","Asoc",434,11.6666666666667
+"Santa Fe","metropolitan","Coop",87,2.33870967741935
+"Santa Fe","metropolitan","Fund",46,1.23655913978495
+"Santa Fe","metropolitan","Mutual",13,0.349462365591398
+"Santa Fe","metropolitan","Otra",401,10.7795698924731
+"Santa Fe","metropolitan","SA",345,9.2741935483871
+"Santa Fe","metropolitan","SAS",823,22.1236559139785
+"Santa Fe","metropolitan","SRL",1571,42.2311827956989
+"Santiago del Estero","peripheral","Asoc",178,25.4285714285714
+"Santiago del Estero","peripheral","Coop",161,23
+"Santiago del Estero","peripheral","Fund",2,0.285714285714286
+"Santiago del Estero","peripheral","Mutual",1,0.142857142857143
+"Santiago del Estero","peripheral","Otra",4,0.571428571428571
+"Santiago del Estero","peripheral","SA",8,1.14285714285714
+"Santiago del Estero","peripheral","SAS",247,35.2857142857143
+"Santiago del Estero","peripheral","SRL",99,14.1428571428571
+"Tierra del Fuego","intermediate","Asoc",30,6.10997963340122
+"Tierra del Fuego","intermediate","Coop",17,3.46232179226069
+"Tierra del Fuego","intermediate","Fund",6,1.22199592668024
+"Tierra del Fuego","intermediate","Mutual",1,0.203665987780041
+"Tierra del Fuego","intermediate","Otra",12,2.44399185336049
+"Tierra del Fuego","intermediate","SA",16,3.25865580448065
+"Tierra del Fuego","intermediate","SAS",373,75.9674134419552
+"Tierra del Fuego","intermediate","SRL",36,7.33197556008147
+"Tucumán","intermediate","Asoc",51,3.07228915662651
+"Tucumán","intermediate","Coop",84,5.06024096385542
+"Tucumán","intermediate","Fund",160,9.63855421686747
+"Tucumán","intermediate","Mutual",2,0.120481927710843
+"Tucumán","intermediate","Otra",11,0.662650602409639
+"Tucumán","intermediate","SA",19,1.14457831325301
+"Tucumán","intermediate","SAS",1162,70
+"Tucumán","intermediate","SRL",171,10.3012048192771

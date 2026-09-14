@@ -110,7 +110,7 @@ Rscript R/06_figuras.R
 
 ## Key findings
 
-- The simplified form did not open a new position in the space of legal forms. It sits where the two commercial forms it replaces already sat, at +0.44 against +0.43 and +0.38 on an axis whose dispersion is 0.946. The first axis carries 83.3% of the inertia and the plane 89.7%.
+- The simplified form did not open a new position in the space of legal forms. On the first axis it sits where the two commercial forms it replaces already sat, at +0.44 against +0.43 and +0.38 on an axis whose dispersion is 0.946. The second axis opposes cooperatives and construction to the SA and real-estate activities, and there the simplified form stays next to the SRL (+0.39 against +0.18) whilst the SA moves away (−0.47). The first axis carries 83.3% of the inertia and the plane 89.7%.
 - Between the Kirchner years and the Milei era the share of associative forms among new registrations falls from 17.6% to 7.9%, and to 9.1% when the era is restricted to 2024 to guard against registration lag. The fall is in the numerator: 4,854 associative registrations per year against 2,568, while total registrations grow 19%.
 - The between-jurisdiction component of the Theil decomposition rises from 9.1% in the 1990s to 44.0% under Fernández, then falls to 31.6% under Milei. It falls because the common component grows, not because jurisdictions converge: their divergence holds at 0.290 against 0.278 while the national composition concentrates from 0.369 to 0.601.
 - The separation between metropolitan and peripheral subcloud centroids grows from 0.59 to 0.79 standard deviations of the cloud between the 1990s and Fernández, and collapses to 0.30 under Milei.
