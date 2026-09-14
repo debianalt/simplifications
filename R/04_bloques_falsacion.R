@@ -18,6 +18,8 @@
 #   control_seccion_iv.csv     control por la sociedad de la Sección IV
 #   densidad_previa.csv        densidad cooperativa previa y resultados
 #   correlaciones.csv          correlaciones con intervalos de confianza
+#   composicion_milei_provincia.csv  composición por forma bajo Milei (figura 3)
+#   contexto_diversidad.csv    contexto provincial y medidas de diversidad (figura S1)
 
 # La raiz del proyecto es el directorio que contiene R/. Se deduce de la
 # ubicacion del propio script, de modo que el arbol es portable.
@@ -241,10 +243,12 @@ cat(sprintf("\n  comparación principal sin la Sección IV: %.1f%% -> %.1f%%\n",
 
 # ── Densidad institucional previa ───────────────────────────────────────────
 # El indicador es previo a la reforma y externo al índice de diversidad: stock
-# de cooperativas y mutuales por cada cien mil habitantes acumulado hasta 2015.
+# de cooperativas y mutuales acumulado hasta 2015 por cada cien mil habitantes
+# de 14 años o más, la población sobre la que el Censo 2022 mide la condición
+# de actividad (data/contexto_provincial.csv, columna pob_empleo).
 titulo("Densidad cooperativa previa contra retención asociativa")
 
-ctx <- as.data.frame(arrow::read_parquet(CTX))
+ctx <- read.csv(CTX, fileEncoding = "UTF-8")
 pob <- ctx[, c("provincia", "pob_empleo")]
 
 stock <- d[d$year <= 2015 & d$tipo %in% c("Coop", "Mutual"), ] |>
@@ -317,5 +321,28 @@ for (i in seq_len(nrow(alta_dens))) {
 sde <- pr[pr$provincia == "Santiago del Estero", ]
 cat(sprintf("\n  única jurisdicción cuya participación asociativa no cae: %s (%.1f%% -> %.1f%%)\n",
             sde$provincia, sde$asoc_kirchnerismo, sde$asoc_milei))
+
+# ── Datos de las figuras 3 y S1 ─────────────────────────────────────────────
+# 06_figuras.R lee sólo salidas/ y data/argentina_provinces.geojson, de modo que
+# las figuras se reproducen sin el registro depurado.
+titulo("Datos de las figuras 3 y S1")
+
+comp <- d[d$era == "milei", ] |>
+  dplyr::count(provincia, prov_type, tipo) |>
+  dplyr::group_by(provincia) |>
+  dplyr::mutate(pct = 100 * n / sum(n)) |>
+  dplyr::ungroup() |>
+  as.data.frame()
+guardar(comp[order(comp$provincia, comp$tipo), ], "composicion_milei_provincia.csv")
+
+ss_milei <- read.csv(file.path(SALIDAS, "shift_share_milei.csv"), fileEncoding = "UTF-8")
+h_milei <- read.csv(file.path(SALIDAS, "shannon_milei_provincia.csv"), fileEncoding = "UTF-8")
+ctx_div <- ctx[, c("provincia", "pda_per_100k", "hhi_empleo", "pct_with_account")] |>
+  dplyr::left_join(h_milei[, c("provincia", "prov_type", "H_completo")], by = "provincia") |>
+  dplyr::left_join(sas_jur[, c("provincia", "sas_milei")], by = "provincia") |>
+  dplyr::left_join(ss_milei[, c("provincia", "diferencial_provincial")], by = "provincia") |>
+  as.data.frame()
+stopifnot(nrow(ctx_div) == 24, !anyNA(ctx_div))
+guardar(ctx_div, "contexto_diversidad.csv")
 
 cat("\nlisto.\n")

@@ -247,12 +247,8 @@ guardar_jpg(p2, "Fig2_csmca_panel", 6.5, 6.4)
 # ══════════════════════════════════ Figura 3: composición bajo Milei ═══
 cat("\nFigura 3: composición organizacional por provincia bajo Milei\n")
 
-d <- cargar_registro(c("tipo", "era", "provincia", "prov_type"))
-comp <- d[d$era == "milei", ] |>
-  dplyr::count(provincia, prov_type, tipo) |>
-  dplyr::group_by(provincia) |>
-  dplyr::mutate(pct = 100 * n / sum(n)) |>
-  dplyr::ungroup()
+# La composición la calcula 04_bloques_falsacion.R desde el registro
+comp <- read.csv(file.path(SALIDAS, "composicion_milei_provincia.csv"), fileEncoding = "UTF-8")
 
 orden <- comp |>
   dplyr::filter(tipo == "SAS") |>
@@ -260,10 +256,6 @@ orden <- comp |>
   dplyr::pull(provincia)
 faltan <- setdiff(unique(comp$provincia), orden)
 orden <- c(faltan, orden)
-
-# Datos de la figura, para el archivo de datos no gráficos del envío
-write.csv(comp[order(comp$provincia, comp$tipo), ],
-          file.path(SALIDAS, "composicion_milei_provincia.csv"), row.names = FALSE)
 
 comp$provincia <- factor(comp$provincia, levels = orden)
 comp$apilado <- factor(comp$tipo, levels = FORMA_APILADO)
@@ -356,20 +348,21 @@ guardar_jpg(p5, "Fig5_shift_share", 6.5, 6.3)
 # ═══════════════════════════════ Figura S1: correlatos económicos ═══
 cat("\nFigura S1: correlatos económicos de la diversidad provincial\n")
 
-ctx <- read.csv(file.path(RAIZ, "tables", "tab_provincial_context.csv"))
+# Contexto provincial y medidas de diversidad, reunidos por 04_bloques_falsacion.R
+ctx <- read.csv(file.path(SALIDAS, "contexto_diversidad.csv"), fileEncoding = "UTF-8")
 abrev <- c("Buenos Aires" = "BA", "Santiago del Estero" = "SdE",
            "Tierra del Fuego" = "TdF")
 ctx$etq <- ifelse(ctx$provincia %in% names(abrev), abrev[ctx$provincia], ctx$provincia)
 
 specs <- list(
-  list("pda_per_100k", "shannon_H_milei",
-       "Acceso financiero (puntos por 100.000 hab.)", "Shannon H (era Milei)"),
-  list("hhi_empleo", "shannon_H_milei",
+  list("pda_per_100k", "H_completo",
+       "Acceso financiero\n(puntos por 100.000 hab. de 14 años o más)", "Shannon H (era Milei)"),
+  list("hhi_empleo", "H_completo",
        "Concentración del empleo (Herfindahl)", "Shannon H (era Milei)"),
-  list("pct_with_account", "sas_share_milei",
+  list("pct_with_account", "sas_milei",
        "% de adultos con cuenta bancaria", "Participación SAS (era Milei)"),
-  list("pda_per_100k", "provincial_diff",
-       "Acceso financiero (puntos por 100.000 hab.)", "Diferencial provincial")
+  list("pda_per_100k", "diferencial_provincial",
+       "Acceso financiero\n(puntos por 100.000 hab. de 14 años o más)", "Diferencial provincial")
 )
 
 paneles <- lapply(specs, function(s) {

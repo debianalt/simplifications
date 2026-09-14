@@ -29,8 +29,9 @@ stopifnot(dir.exists(file.path(ES_ROOT, "R")))
 ES   <- ES_ROOT
 RAIZ <- dirname(ES)
 
-# Los parquet viven en la carpeta de datos del proyecto, que está un nivel
-# arriba en el árbol de trabajo y dentro del repositorio de replicación.
+# Los datos de entrada viven en la carpeta de datos del proyecto, que está un
+# nivel arriba en el árbol de trabajo y dentro del repositorio de replicación.
+# El contexto provincial lo construye R/contexto_provincial.R.
 DATOS <- if (dir.exists(file.path(ES, "data"))) {
   file.path(ES, "data")
 } else {
@@ -38,7 +39,7 @@ DATOS <- if (dir.exists(file.path(ES, "data"))) {
 }
 PARQUET   <- file.path(DATOS, "national_orgs_clean.parquet")
 GEOJSON   <- file.path(DATOS, "argentina_provinces.geojson")
-CTX       <- file.path(DATOS, "provincial_context.parquet")
+CTX       <- file.path(DATOS, "contexto_provincial.csv")
 SALIDAS   <- file.path(ES, "salidas")
 FIGURAS   <- file.path(ES, "figures")
 dir.create(SALIDAS, showWarnings = FALSE)

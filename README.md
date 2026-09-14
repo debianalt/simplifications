@@ -15,19 +15,22 @@ simplifications/
 |-- requirements.txt          # Python dependencies for the dataset builder
 |-- .gitignore
 |-- data/
-|   |-- README.md             # Data sources and download instructions
+|   |-- README.md             # Data sources, variable definitions, download instructions
+|   |-- contexto_provincial.csv       # Provincial indicators from four public sources (24 rows)
+|   |-- argentina_provinces.geojson   # Provincial boundaries, Natural Earth (public domain)
 |-- scripts/
 |   |-- 00_build_national_dataset.py    # Cleaning, deduplication, exclusion chain
 |-- R/
 |   |-- replicar.R            # Driver: runs steps 1 to 6 in order
 |   |-- 00_comun.R            # Paths, study constants, shared functions
+|   |-- contexto_provincial.R # Optional: rebuilds data/contexto_provincial.csv from raw sources
 |   |-- 01_acm.R              # Correspondence analysis and subcloud analysis
 |   |-- 02_theil.R            # Theil decomposition, Shannon H, annual series
 |   |-- 03_shift_share.R      # Shift-share decomposition
 |   |-- 04_bloques_falsacion.R          # Association-threshold blocks and tests
 |   |-- 05_cuadros.R          # Supplementary tables in markdown
 |   |-- 06_figuras.R          # Seven figures at 300 dpi
-|-- salidas/                  # All analytical outputs (CSV) and tables (markdown)
+|-- salidas/                  # All analytical outputs (CSV, one parquet) and tables (markdown)
 |-- figures/                  # Published figures (JPG, 300 dpi)
 ```
 
@@ -69,6 +72,7 @@ The political era and fiscal status are deliberately kept out of the active set.
 | INAES | Resolución 1000/2021 | August 2021 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/248024/20210812) |
 | INAES | Resolución 2867/2024 | December 2024 | [boletinoficial.gob.ar](https://www.boletinoficial.gob.ar/detalleAviso/primera/318056/20241212) |
 | DPPJ, Provincia de Buenos Aires | Disposición 49/2024 | June 2024 | [gba.gob.ar](https://www.gba.gob.ar/dppj/sociedades_por_acciones_simplificadas_sas) |
+| Natural Earth | Admin 1 – States, Provinces, 1:10m | — | [naturalearthdata.com](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/) |
 
 ## Analytical pipeline
 
@@ -80,9 +84,9 @@ Step 0 builds the dataset in Python. Steps 1 to 6 run the analysis in R.
 | 1 | `R/01_acm.R` | Correspondence analysis of the 8 × 21 legal form by activity table; supplementary projection of era, fiscal status, jurisdiction type and the 24 jurisdictions; subcloud analysis with concentration ellipses | Eigenvalues, category coordinates, supplementary barycentres, subclouds |
 | 2 | `R/02_theil.R` | Theil decomposition across eight political eras; Shannon *H* by jurisdiction with bootstrap intervals; annual series | Theil tables, Shannon by jurisdiction, annual series |
 | 3 | `R/03_shift_share.R` | Shift-share: Kirchnerism against Fernández and against Milei | Provincial differentials for two comparison periods |
-| 4 | `R/04_bloques_falsacion.R` | Association-threshold blocks, right-censoring control, SAS diffusion by jurisdiction, institutional-density test | Block series, SAS by jurisdiction, correlations with intervals |
+| 4 | `R/04_bloques_falsacion.R` | Association-threshold blocks, right-censoring control, SAS diffusion by jurisdiction, institutional-density test (population aged 14 and over from `data/contexto_provincial.csv`), data for Figures 3 and S1 | Block series, SAS by jurisdiction, correlations with intervals, `composicion_milei_provincia.csv`, `contexto_diversidad.csv` |
 | 5 | `R/05_cuadros.R` | Supplementary tables | `salidas/cuadros/*.md` |
-| 6 | `R/06_figuras.R` | Seven figures at 300 dpi | `figures/*.jpg` |
+| 6 | `R/06_figuras.R` | Seven figures at 300 dpi, read only from `salidas/` and `data/argentina_provinces.geojson` | `figures/*.jpg` |
 
 The Theil decomposition is written as an identity that the code checks on every run:
 
@@ -102,10 +106,18 @@ python scripts/00_build_national_dataset.py
 Rscript R/replicar.R
 ```
 
-To reproduce the figures only, using the outputs already in `salidas/`:
+The full pipeline needs `data/national_orgs_clean.parquet`, which the step-0 script builds from the raw registry; the provincial context table and the map boundaries are already in `data/`.
+
+To reproduce the seven figures only, without the registry, from the outputs in `salidas/` and the boundaries in `data/`:
 
 ```bash
 Rscript R/06_figuras.R
+```
+
+`data/contexto_provincial.csv` can be rebuilt from the raw BCRA, CEP XXI, MAGyP and census files listed in `data/README.md`. The script stops if the rebuilt table differs from the published one, so a later download of the sources cannot silently replace it:
+
+```bash
+CONTEXTO_CRUDO=/path/to/raw/files Rscript R/contexto_provincial.R
 ```
 
 ## Key findings
@@ -116,17 +128,18 @@ Rscript R/06_figuras.R
 - The separation between metropolitan and peripheral subcloud centroids grows from 0.59 to 0.79 standard deviations of the cloud between the 1990s and Fernández, and collapses to 0.30 under Milei.
 - The simplified form accounts for 83.4% of new registrations in Mendoza and 5.1% in Buenos Aires province, and exceeds half in eleven of the twenty-four jurisdictions. In the Autonomous City of Buenos Aires it falls from 37.9% in 2019 to 1.2% in 2023 while its registry adds requirements, and recovers to 21.0% in 2025 after they are repealed. Buenos Aires province falls in parallel without an equivalent normative sequence; in June 2024 its registry added the seat and digital-book requirements the capital had just repealed while opening a new digital channel, and its recovery is weaker (6.9% in 2025 against 21.0% in the capital).
 - The associative threshold itself moved within the window: INAES lowered the minimum for worker cooperatives from six to three members between August 2021 and December 2024. The 2022-2023 peak of associative registrations coincides with the lower threshold; the 2024 fall precedes its repeal.
-- Accumulated cooperative density before the reform does not predict associative retention (*r* = 0.14, 95% CI −0.28 to 0.51, *N* = 24). With twenty-four units the interval is too wide to separate a small effect from its absence.
+- Accumulated cooperative and mutual density before the reform, per 100,000 inhabitants aged 14 and over, does not predict associative retention (*r* = 0.14, 95% CI −0.28 to 0.51, *N* = 24). With twenty-four units the interval is too wide to separate a small effect from its absence.
 - Under Milei the most diverse jurisdiction more than doubles the least diverse (Entre Ríos 1.61, 95% CI 1.56 to 1.66; Mendoza 0.69, 95% CI 0.65 to 0.72). Twenty-two of the twenty-three adjacent pairs overlap, so only contrasts between extremes are interpretable.
 
 ## Requirements
 
 - Python >= 3.10 for the dataset builder, see `requirements.txt`
-- R >= 4.5 with `arrow`, `dplyr`, `tidyr`, `GDAtools`, `ggplot2`, `ggrepel`, `patchwork`, `sf` and `scales`
+- R >= 4.5 with `arrow`, `dplyr`, `tidyr`, `GDAtools`, `ggplot2`, `ggrepel`, `patchwork`, `sf`, `scales` and `magick`; `data.table` and `readxl` only to rebuild the provincial context table
 
 ```r
 install.packages(c("arrow", "dplyr", "tidyr", "GDAtools", "ggplot2",
-                   "ggrepel", "patchwork", "sf", "scales"))
+                   "ggrepel", "patchwork", "sf", "scales", "magick",
+                   "data.table", "readxl"))
 ```
 
 ## License

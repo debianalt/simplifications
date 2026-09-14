@@ -6,7 +6,9 @@
 #
 # Requiere que data/national_orgs_clean.parquet exista. Ese archivo lo produce
 # scripts/00_build_national_dataset.py a partir del CSV crudo del Registro
-# Nacional de Sociedades; ver data/README.md.
+# Nacional de Sociedades; ver data/README.md. El contexto provincial
+# (data/contexto_provincial.csv) y los límites del mapa ya vienen en data/; el
+# contexto se reconstruye aparte con R/contexto_provincial.R.
 #
 # Escribe las salidas en salidas/ y las figuras en figures/, sobrescribiendo
 # las versiones publicadas en este repositorio.
