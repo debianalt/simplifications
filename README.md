@@ -1,12 +1,4 @@
-# Who is left to associate? Company simplification and federalism in Argentina
-
-**Raimundo Elias Gomez**
-CONICET / FHyCS, Universidad Nacional de Misiones, Argentina
-ORCID: [0000-0002-4468-9618](https://orcid.org/0000-0002-4468-9618)
-
-**María Gabriela Miño**
-CONICET / FHyCS, Universidad Nacional de Misiones, Argentina
-ORCID: [0000-0002-5057-5158](https://orcid.org/0000-0002-5057-5158)
+# Replication code: legal forms in the Argentine National Company Registry, 1901-2025
 
 ## Overview
 
@@ -136,10 +128,6 @@ Rscript R/06_figuras.R
 install.packages(c("arrow", "dplyr", "tidyr", "GDAtools", "ggplot2",
                    "ggrepel", "patchwork", "sf", "scales"))
 ```
-
-## Citation
-
-Gomez, R. E. and Miño, M. G. (2026). Who is left to associate? Company simplification and federalism in Argentina. Manuscript under review.
 
 ## License
 

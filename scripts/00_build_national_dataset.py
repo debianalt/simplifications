@@ -59,7 +59,7 @@ def classify_tipo(t):
     return "Otra"
 
 
-# Subtipo keywords — same as Misiones article
+# Subtipo keywords
 SUBTIPO_KEYWORDS = {
     "agro": [
         "AGROPECUAR", "AGRO ", "AGRICOL", "GANADER", "YERBA", "TABAC",

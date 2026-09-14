@@ -1,6 +1,6 @@
 # 00_comun.R — rutas, constantes y utilidades compartidas
 # ============================================================================
-# Proyecto: ¿Quién queda para asociarse? — envío a Estudios Sociológicos
+# Proyecto: formas jurídicas en el Registro Nacional de Sociedades, 1901-2025
 #
 # Todo el análisis del artículo vive en R (regla de la casa, 7 sep 2026).
 # Python queda para la generación del DOCX y la verificación de formato.
