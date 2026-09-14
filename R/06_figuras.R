@@ -217,14 +217,17 @@ etq_n$texto <- sprintf("%s: n = %s", TIPO_PROV_ETIQUETA[etq_n$tipo_prov], fmt_n(
 etq_n$fila <- match(etq_n$tipo_prov, TIPO_PROV_ORDEN)
 
 FRANJA_N <- 1.5
+# Con la paleta apagada y el trazo discontinuo, una línea fina no deja ver el
+# color del tipo de provincia: las elipses y su muestra en la leyenda van gruesas
+LINEA_ELIPSE <- 1.3
 
 p2 <- ggplot() +
   geom_hline(yintercept = 0, colour = "grey70", linewidth = 0.25) +
   geom_vline(xintercept = 0, colour = "grey70", linewidth = 0.25) +
   geom_path(data = elipses, aes(x, y, colour = tipo_prov, group = grupo,
-                                linetype = tipo_prov), linewidth = 0.7) +
+                                linetype = tipo_prov), linewidth = LINEA_ELIPSE) +
   geom_point(data = subn, aes(centro1, centro2, colour = tipo_prov),
-             shape = 3, size = 2.4, stroke = 0.9, show.legend = FALSE) +
+             shape = 3, size = 2.8, stroke = 1.3, show.legend = FALSE) +
   geom_text(data = etq_n, aes(x = -Inf, y = Inf, label = texto, colour = tipo_prov,
                               vjust = 1.4 + 1.25 * (fila - 1)),
             hjust = -0.06, size = ANOT_MM, fontface = "bold", show.legend = FALSE) +
@@ -239,8 +242,10 @@ p2 <- ggplot() +
   labs(x = lab_eje1, y = lab_eje2) +
   # Franja libre arriba de las elipses para los tamaños de las subnubes
   coord_fixed(ylim = c(min(elipses$y), max(elipses$y) + FRANJA_N)) +
+  guides(colour = guide_legend(override.aes = list(linewidth = LINEA_ELIPSE))) +
   tema_es() +
-  theme(legend.position = "bottom", panel.spacing = unit(0.12, "in"))
+  theme(legend.position = "bottom", panel.spacing = unit(0.12, "in"),
+        legend.key.width = unit(0.45, "in"))
 
 guardar_jpg(p2, "Fig2_csmca_panel", 6.5, 6.4)
 
