@@ -31,7 +31,7 @@ source(file.path(ES_ROOT, "R", "00_comun.R"))
 
 titulo("02 — Diversidad organizacional y descomposición de Theil")
 
-d <- cargar_registro(c("tipo", "era", "provincia", "prov_type", "year"))
+d <- cargar_registro(c("tipo", "era", "provincia", "region", "year"))
 cat("N =", fmt_n(nrow(d)), "organizaciones\n")
 
 # Una forma jurídica nueva eleva la entropía por construcción, al margen de lo
@@ -89,14 +89,14 @@ stopifnot(nrow(m24) + nrow(m25) == nrow(milei))
 titulo("Índice de Shannon H por provincia")
 
 shannon_prov <- d |>
-  dplyr::count(provincia, prov_type, era, tipo) |>
-  dplyr::group_by(provincia, prov_type, era) |>
+  dplyr::count(provincia, region, era, tipo) |>
+  dplyr::group_by(provincia, region, era) |>
   dplyr::summarise(H = shannon(n), n = sum(n), .groups = "drop")
 guardar(as.data.frame(shannon_prov), "shannon_por_provincia.csv")
 
 # Variante con SAS y SRL fusionadas, sólo para la era Milei
 h_milei <- d[d$era == "milei", ] |>
-  dplyr::group_by(provincia, prov_type) |>
+  dplyr::group_by(provincia, region) |>
   dplyr::summarise(
     H_completo = shannon(table(tipo)),
     H_fusion   = shannon(table(tipo_fusion)),

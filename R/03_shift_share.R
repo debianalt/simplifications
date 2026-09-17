@@ -49,7 +49,7 @@ source(file.path(ES_ROOT, "R", "00_comun.R"))
 
 titulo("03 — Descomposición shift-share")
 
-d <- cargar_registro(c("tipo", "era", "provincia", "prov_type", "year"))
+d <- cargar_registro(c("tipo", "era", "provincia", "region", "year"))
 cat("N =", fmt_n(nrow(d)), "organizaciones\n")
 
 shift_share <- function(df, eras_ref, eras_comp) {
@@ -76,7 +76,7 @@ shift_share <- function(df, eras_ref, eras_comp) {
   G_k <- ifelse(nac_ref > 0, nac_comp / nac_ref, 0)
 
   provincias <- sort(unique(df$provincia))
-  tipo_de_prov <- tapply(df$prov_type, df$provincia, function(x) x[1])
+  tipo_de_prov <- tapply(df$region, df$provincia, function(x) x[1])
   filas <- lapply(provincias, function(p) {
     pr <- ref[ref$provincia == p, ]
     pc <- comp[comp$provincia == p, ]
@@ -94,7 +94,7 @@ shift_share <- function(df, eras_ref, eras_comp) {
     sin_base <- e0 == 0 & e1 > 0
     data.frame(
       provincia = p,
-      prov_type = unname(tipo_de_prov[p]),
+      region = unname(tipo_de_prov[p]),
       tasa_ref  = sum(e0),
       tasa_comp = sum(e1),
       cambio_real = sum(e1) - sum(e0),
@@ -141,11 +141,11 @@ for (cfg in list(
   for (i in seq_len(nrow(ext))) {
     cat(sprintf("    %-22s %+9.1f  (%s)\n", ext$provincia[i],
                 ext$diferencial_provincial[i],
-                unname(TIPO_PROV_ETIQUETA[ext$prov_type[i]])))
+                unname(REGION_ETIQUETA[ext$region[i]])))
   }
 
-  perif_pos <- ss[ss$prov_type == "peripheral" & ss$diferencial_provincial > 0, ]
-  cat(sprintf("\n  periféricas con diferencial positivo: %s\n",
+  perif_pos <- ss[ss$region %in% c("nea", "noa") & ss$diferencial_provincial > 0, ]
+  cat(sprintf("\n  jurisdicciones del norte con diferencial positivo: %s\n",
               if (nrow(perif_pos)) paste(perif_pos$provincia, collapse = ", ") else "ninguna"))
 }
 
@@ -154,7 +154,7 @@ titulo("Provincias que invierten el signo del diferencial entre Fernández y Mil
 
 a <- read.csv(file.path(SALIDAS, "shift_share_fernandez.csv"))
 b <- read.csv(file.path(SALIDAS, "shift_share_milei.csv"))
-m <- merge(a[, c("provincia", "prov_type", "diferencial_provincial")],
+m <- merge(a[, c("provincia", "region", "diferencial_provincial")],
            b[, c("provincia", "diferencial_provincial")],
            by = "provincia", suffixes = c("_fern", "_milei"))
 m$invierte <- sign(m$diferencial_provincial_fern) != sign(m$diferencial_provincial_milei)

@@ -13,7 +13,7 @@
 #
 # Salidas en salidas/:
 #   bloques_por_era.csv        participación y altas anualizadas por bloque
-#   bloques_por_tipo_prov.csv  bloque asociativo por tipo de provincia
+#   bloques_por_region.csv     bloque asociativo por región
 #   capital_interno.csv        composición interna del bloque de capital
 #   control_seccion_iv.csv     control por la sociedad de la Sección IV
 #   densidad_previa.csv        densidad cooperativa previa y resultados
@@ -36,7 +36,7 @@ source(file.path(ES_ROOT, "R", "00_comun.R"))
 
 titulo("04 — Bloques por umbral de asociación y falsación del mecanismo")
 
-d <- cargar_registro(c("tipo", "era", "provincia", "prov_type", "year", "seccion_iv"))
+d <- cargar_registro(c("tipo", "era", "provincia", "region", "year", "seccion_iv"))
 cat("N =", fmt_n(nrow(d)), "organizaciones\n")
 
 # ── Bloques por era ─────────────────────────────────────────────────────────
@@ -143,18 +143,18 @@ for (i in seq_len(nrow(serie_asoc))) {
               fmt_n(serie_asoc$asociativas[i]), serie_asoc$pct[i]))
 }
 
-# ── Bloque asociativo por tipo de provincia ─────────────────────────────────
-titulo("Bloque asociativo por tipo de provincia")
+# ── Bloque asociativo por región ────────────────────────────────────────────
+titulo("Bloque asociativo por región")
 
-por_tipo <- do.call(rbind, lapply(TIPO_PROV_ORDEN, function(tp) {
-  k <- kir[kir$prov_type == tp, ]; m <- mil[mil$prov_type == tp, ]
+por_tipo <- do.call(rbind, lapply(REGION_ORDEN, function(tp) {
+  k <- kir[kir$region == tp, ]; m <- mil[mil$region == tp, ]
   pk <- 100 * mean(k$bloque == "asociativa"); pm <- 100 * mean(m$bloque == "asociativa")
   cat(sprintf("  %-15s %11.1f%% -> %6.1f%%   retiene %.0f%%\n",
-              TIPO_PROV_ETIQUETA[tp], pk, pm, 100 * pm / pk))
-  data.frame(tipo_prov = tp, tipo_prov_es = unname(TIPO_PROV_ETIQUETA[tp]),
+              REGION_ETIQUETA[tp], pk, pm, 100 * pm / pk))
+  data.frame(region = tp, region_es = unname(REGION_ETIQUETA[tp]),
              pct_kirchnerismo = pk, pct_milei = pm, retencion = pm / pk)
 }))
-guardar(por_tipo, "bloques_por_tipo_prov.csv")
+guardar(por_tipo, "bloques_por_region.csv")
 
 # ── Composición interna del bloque de capital ───────────────────────────────
 titulo("Composición interna del bloque de capital")
@@ -182,7 +182,7 @@ titulo("Difusión de la SAS por jurisdicción y era")
 ERAS_SAS <- c("macri", "fernandez", "milei")
 sas_jur <- d |>
   dplyr::filter(era %in% ERAS_SAS) |>
-  dplyr::group_by(provincia, prov_type, era) |>
+  dplyr::group_by(provincia, region, era) |>
   dplyr::summarise(pct_sas = 100 * mean(tipo == "SAS"), .groups = "drop") |>
   tidyr::pivot_wider(names_from = era, values_from = pct_sas, names_prefix = "sas_") |>
   dplyr::arrange(dplyr::desc(sas_milei)) |>
@@ -195,7 +195,7 @@ cat(sprintf("  extremos bajo Milei: %s %.1f%% y %s %.1f%%\n",
             sas_jur$provincia[1], sas_jur$sas_milei[1],
             sas_jur$provincia[nrow(sas_jur)], sas_jur$sas_milei[nrow(sas_jur)]))
 
-# Serie anual de las dos jurisdicciones metropolitanas mayores. La de la CABA se
+# Serie anual de las dos jurisdicciones mayores. La de la CABA se
 # contrasta contra la posición normativa de su registro, la Inspección General
 # de Justicia, que entre 2020 y 2023 sumó requisitos a la SAS y los derogó en
 # bloque por la Resolución General 11/2024.
@@ -255,7 +255,7 @@ stock <- d[d$year <= 2015 & d$tipo %in% c("Coop", "Mutual"), ] |>
   dplyr::count(provincia, name = "stock_coop_mutual")
 
 prov <- d |>
-  dplyr::group_by(provincia, prov_type) |>
+  dplyr::group_by(provincia, region) |>
   dplyr::summarise(.groups = "drop") |>
   dplyr::left_join(stock, by = "provincia") |>
   dplyr::left_join(pob, by = "provincia") |>
@@ -328,7 +328,7 @@ cat(sprintf("\n  única jurisdicción cuya participación asociativa no cae: %s 
 titulo("Datos de las figuras 3 y S1")
 
 comp <- d[d$era == "milei", ] |>
-  dplyr::count(provincia, prov_type, tipo) |>
+  dplyr::count(provincia, region, tipo) |>
   dplyr::group_by(provincia) |>
   dplyr::mutate(pct = 100 * n / sum(n)) |>
   dplyr::ungroup() |>
@@ -338,7 +338,7 @@ guardar(comp[order(comp$provincia, comp$tipo), ], "composicion_milei_provincia.c
 ss_milei <- read.csv(file.path(SALIDAS, "shift_share_milei.csv"), fileEncoding = "UTF-8")
 h_milei <- read.csv(file.path(SALIDAS, "shannon_milei_provincia.csv"), fileEncoding = "UTF-8")
 ctx_div <- ctx[, c("provincia", "pda_per_100k", "hhi_empleo", "pct_with_account")] |>
-  dplyr::left_join(h_milei[, c("provincia", "prov_type", "H_completo")], by = "provincia") |>
+  dplyr::left_join(h_milei[, c("provincia", "region", "H_completo")], by = "provincia") |>
   dplyr::left_join(sas_jur[, c("provincia", "sas_milei")], by = "provincia") |>
   dplyr::left_join(ss_milei[, c("provincia", "diferencial_provincial")], by = "provincia") |>
   as.data.frame()

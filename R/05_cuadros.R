@@ -89,7 +89,7 @@ h$equit <- h$H_completo / log(h$S)
 h <- h[order(-h$H_completo), ]
 escribir("S3",
   c("Provincia", "*n*", "Shannon *H*", "IC 95% de *H*", "Equitatividad",
-    "*H* con SAS y SRL fusionadas", "Tipo de provincia"),
+    "*H* con SAS y SRL fusionadas", "Región"),
   filas_de(h, list(
     function(r) r$provincia,
     function(r) ent(r$n),
@@ -97,7 +97,7 @@ escribir("S3",
     function(r) sprintf("[%s; %s]", num(r$H_ic_inf, 2), num(r$H_ic_sup, 2)),
     function(r) num(r$equit, 2),
     function(r) num(r$H_fusion, 2),
-    function(r) unname(TIPO_PROV_ETIQUETA[r$prov_type]))))
+    function(r) unname(REGION_ETIQUETA[r$region]))))
 
 # ── S4 y S4b: shift-share ───────────────────────────────────────────────────
 for (cfg in list(list("S4", "shift_share_milei.csv"),
@@ -105,11 +105,11 @@ for (cfg in list(list("S4", "shift_share_milei.csv"),
   ss <- read.csv(file.path(SALIDAS, cfg[[2]]))
   ss <- ss[order(ss$diferencial_provincial), ]
   escribir(cfg[[1]],
-    c("Provincia", "Tipo", "Tasa de referencia", "Tasa de comparación",
+    c("Provincia", "Región", "Tasa de referencia", "Tasa de comparación",
       "Efecto nacional", "Mix estructural", "Diferencial provincial", "SAS (%)"),
     filas_de(ss, list(
       function(r) r$provincia,
-      function(r) unname(TIPO_PROV_ETIQUETA[r$prov_type]),
+      function(r) unname(REGION_ETIQUETA[r$region]),
       function(r) num(r$tasa_ref, 1),
       function(r) num(r$tasa_comp, 1),
       function(r) sgn(r$efecto_nacional, 1),
@@ -118,22 +118,22 @@ for (cfg in list(list("S4", "shift_share_milei.csv"),
       function(r) num(r$pct_sas, 1))))
 }
 
-# ── S5: subnubes por tipo de provincia ───────────────────────────────────────────────────
+# ── S5: subnubes por región ─────────────────────────────────────────────────
 sn <- read.csv(file.path(SALIDAS, "acm_subnubes.csv"))
 sn <- sn[sn$era_grupo %in% c("Kirchnerismo", "Macri", "Fernández", "Milei"), ]
 sn$era_grupo <- factor(sn$era_grupo, levels = c("Kirchnerismo", "Macri", "Fernández", "Milei"))
-sn <- sn[order(sn$era_grupo, match(sn$tipo_prov, TIPO_PROV_ORDEN)), ]
+sn <- sn[order(sn$era_grupo, match(sn$region, REGION_ORDEN)), ]
 escribir("S5",
-  c("Era", "Tipo de provincia", "*n*", "Centroide eje 1", "Centroide eje 2",
-    "Inercia de clase", "Separación metropolitana-periférica (desviaciones)"),
+  c("Era", "Región", "*n*", "Centroide eje 1", "Centroide eje 2",
+    "Inercia de clase", "Amplitud entre centroides regionales (desviaciones)"),
   filas_de(sn, list(
     function(r) as.character(r$era_grupo),
-    function(r) r$tipo_prov_es,
+    function(r) r$region_es,
     function(r) ent(r$n),
     function(r) sgn(r$centro1, 2),
     function(r) sgn(r$centro2, 2),
     function(r) num(r$inercia, 3),
-    function(r) if (r$tipo_prov == "metropolitan") num(r$separacion_sd, 2) else "")))
+    function(r) if (r$region == REGION_ORDEN[1]) num(r$amplitud_sd, 2) else "")))
 
 # ── S6: categorías del plano factorial ──────────────────────────────────────────────────
 ca <- read.csv(file.path(SALIDAS, "acm_categorias.csv"))
@@ -186,12 +186,12 @@ escribir("S7a",
     function(r) num(r$pct_capital, 1),
     function(r) num(r$pct_patrimonial, 1))))
 
-pt <- read.csv(file.path(SALIDAS, "bloques_por_tipo_prov.csv"))
+pt <- read.csv(file.path(SALIDAS, "bloques_por_region.csv"))
 escribir("S7b",
-  c("Tipo de provincia", "% asociativo, kirchnerismo", "% asociativo, era Milei",
+  c("Región", "% asociativo, kirchnerismo", "% asociativo, era Milei",
     "Proporción retenida"),
   filas_de(pt, list(
-    function(r) r$tipo_prov_es,
+    function(r) r$region_es,
     function(r) num(r$pct_kirchnerismo, 1),
     function(r) num(r$pct_milei, 1),
     function(r) num(r$retencion, 2))))
@@ -259,11 +259,11 @@ stopifnot(suma == total)
 # ── S8b y S8c: difusión de la SAS por jurisdicción ──────────────────────────
 sj <- read.csv(file.path(SALIDAS, "sas_por_jurisdiccion.csv"))
 escribir("S8b",
-  c("Jurisdicción", "Tipo", "% SAS bajo Macri", "% SAS bajo Fernández",
+  c("Jurisdicción", "Región", "% SAS bajo Macri", "% SAS bajo Fernández",
     "% SAS bajo Milei"),
   filas_de(sj, list(
     function(r) r$provincia,
-    function(r) unname(TIPO_PROV_ETIQUETA[r$prov_type]),
+    function(r) unname(REGION_ETIQUETA[r$region]),
     function(r) num(r$sas_macri, 1),
     function(r) num(r$sas_fernandez, 1),
     function(r) num(r$sas_milei, 1))))

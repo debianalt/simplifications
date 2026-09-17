@@ -51,11 +51,13 @@ BORDE_PX <- 24
 # color de su bloque analítico: capital en azules pizarra (de oscuro a claro,
 # SAS, SRL, SA), patrimonial en grises y asociativo en tierras. En el orden de
 # apilado de la figura 3 los pares contiguos se separan por ΔE >= 16,8 bajo
-# deuteranopía y 17,3 con visión normal (validador de dataviz). El tipo de
-# provincia usa tonos que no están entre los de las formas, para que los
-# nombres coloreados de la figura 3 no se confundan con los segmentos.
-COL_TIPO_PROV <- c(metropolitan = "#3b3b3b", intermediate = "#4f7a41",
-                   peripheral = "#7d5a96")
+# deuteranopía y 17,3 con visión normal (validador de dataviz). Las regiones
+# usan tonos que no están entre los de las formas, para que los nombres
+# coloreados de la figura 3 no se confundan con los segmentos.
+COL_REGION <- c(pampeana = "#3b3b3b", noa = "#7d5a96", nea = "#a3455f",
+                cuyo = "#4f7a41", patagonia = "#2b7c86")
+LINEA_REGION <- c(pampeana = "solid", noa = "dashed", nea = "dotdash",
+                  cuyo = "dotted", patagonia = "longdash")
 COL_VAR <- c(tipo = "#8B0000", clae_sec = "#2F4F4F")
 FORMA_MARCA <- c(tipo = 16, clae_sec = 15)
 
@@ -204,39 +206,38 @@ elipses <- read.csv(file.path(SALIDAS, "acm_elipses.csv"))
 subn <- read.csv(file.path(SALIDAS, "acm_subnubes.csv"))
 elipses$era_grupo <- factor(elipses$era_grupo, levels = ERA_GRUPO_ORDEN)
 subn$era_grupo <- factor(subn$era_grupo, levels = ERA_GRUPO_ORDEN)
-elipses$tipo_prov <- factor(elipses$tipo_prov, levels = TIPO_PROV_ORDEN)
-subn$tipo_prov <- factor(subn$tipo_prov, levels = TIPO_PROV_ORDEN)
-elipses$grupo <- paste(elipses$era_grupo, elipses$tipo_prov)
+elipses$region <- factor(elipses$region, levels = REGION_ORDEN)
+subn$region <- factor(subn$region, levels = REGION_ORDEN)
+elipses$grupo <- paste(elipses$era_grupo, elipses$region)
 
 letras <- setNames(sprintf("(%s) %s", letters[1:6], ERA_GRUPO_ORDEN), ERA_GRUPO_ORDEN)
 elipses$panel <- factor(letras[as.character(elipses$era_grupo)], levels = letras)
 subn$panel <- factor(letras[as.character(subn$era_grupo)], levels = letras)
 
 etq_n <- subn
-etq_n$texto <- sprintf("%s: n = %s", TIPO_PROV_ETIQUETA[etq_n$tipo_prov], fmt_n(etq_n$n))
-etq_n$fila <- match(etq_n$tipo_prov, TIPO_PROV_ORDEN)
+etq_n$texto <- sprintf("%s: n = %s", REGION_ETIQUETA[etq_n$region], fmt_n(etq_n$n))
+etq_n$fila <- match(etq_n$region, REGION_ORDEN)
 
-FRANJA_N <- 1.5
+FRANJA_N <- 2.6
 # Con la paleta apagada y el trazo discontinuo, una línea fina no deja ver el
-# color del tipo de provincia: las elipses y su muestra en la leyenda van gruesas
+# color de la región: las elipses y su muestra en la leyenda van gruesas
 LINEA_ELIPSE <- 1.3
 
 p2 <- ggplot() +
   geom_hline(yintercept = 0, colour = "grey70", linewidth = 0.25) +
   geom_vline(xintercept = 0, colour = "grey70", linewidth = 0.25) +
-  geom_path(data = elipses, aes(x, y, colour = tipo_prov, group = grupo,
-                                linetype = tipo_prov), linewidth = LINEA_ELIPSE) +
-  geom_point(data = subn, aes(centro1, centro2, colour = tipo_prov),
+  geom_path(data = elipses, aes(x, y, colour = region, group = grupo,
+                                linetype = region), linewidth = LINEA_ELIPSE) +
+  geom_point(data = subn, aes(centro1, centro2, colour = region),
              shape = 3, size = 2.8, stroke = 1.3, show.legend = FALSE) +
-  geom_text(data = etq_n, aes(x = -Inf, y = Inf, label = texto, colour = tipo_prov,
+  geom_text(data = etq_n, aes(x = -Inf, y = Inf, label = texto, colour = region,
                               vjust = 1.4 + 1.25 * (fila - 1)),
             hjust = -0.06, size = ANOT_MM, fontface = "bold", show.legend = FALSE) +
   facet_wrap(~panel, ncol = 3) +
-  scale_colour_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                      labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
-  scale_linetype_manual(values = c(metropolitan = "solid", intermediate = "dashed",
-                                   peripheral = "dotdash"),
-                        name = "Tipo de provincia", labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
+  scale_colour_manual(values = COL_REGION, name = "Región",
+                      labels = REGION_ETIQUETA, breaks = REGION_ORDEN) +
+  scale_linetype_manual(values = LINEA_REGION,
+                        name = "Región", labels = REGION_ETIQUETA, breaks = REGION_ORDEN) +
   scale_x_continuous(breaks = -3:2, labels = num_es) +
   scale_y_continuous(breaks = c(-2, 0, 2), labels = num_es) +
   labs(x = lab_eje1, y = lab_eje2) +
@@ -266,7 +267,7 @@ comp$provincia <- factor(comp$provincia, levels = orden)
 comp$apilado <- factor(comp$tipo, levels = FORMA_APILADO)
 comp$tipo <- factor(comp$tipo, levels = FORMA_ORDEN)
 
-col_ejes <- COL_TIPO_PROV[comp$prov_type[match(levels(comp$provincia), comp$provincia)]]
+col_ejes <- COL_REGION[comp$region[match(levels(comp$provincia), comp$provincia)]]
 
 p3 <- ggplot(comp, aes(pct, provincia, fill = tipo, group = apilado)) +
   geom_col(width = 0.75, colour = "white", linewidth = 0.15) +
@@ -332,14 +333,14 @@ ss <- rbind(ssf, ssm)
 
 orden_ss <- ssm$provincia[order(ssm$diferencial_provincial)]
 ss$provincia <- factor(ss$provincia, levels = orden_ss)
-col_ss <- COL_TIPO_PROV[ssm$prov_type[match(orden_ss, ssm$provincia)]]
+col_ss <- COL_REGION[ssm$region[match(orden_ss, ssm$provincia)]]
 
-p5 <- ggplot(ss, aes(diferencial_provincial, provincia, fill = prov_type)) +
+p5 <- ggplot(ss, aes(diferencial_provincial, provincia, fill = region)) +
   geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.4) +
   geom_col(width = 0.72) +
   facet_wrap(~panel, ncol = 2) +
-  scale_fill_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                    labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
+  scale_fill_manual(values = COL_REGION, name = "Región",
+                    labels = REGION_ETIQUETA, breaks = REGION_ORDEN) +
   scale_x_continuous(breaks = c(-2000, 0, 2000),
                      labels = num_es) +
   labs(x = "Diferencial provincial (organizaciones por año)", y = NULL) +
@@ -371,7 +372,7 @@ specs <- list(
 )
 
 paneles <- lapply(specs, function(s) {
-  ggplot(ctx, aes(.data[[s[[1]]]], .data[[s[[2]]]], colour = prov_type)) +
+  ggplot(ctx, aes(.data[[s[[1]]]], .data[[s[[2]]]], colour = region)) +
     geom_point(size = 2.2, alpha = 0.9) +
     geom_text_repel(aes(label = etq), size = ANOT_MM, show.legend = FALSE,
                     max.overlaps = Inf, box.padding = 0.35, point.padding = 0.15, force = 3,
@@ -379,8 +380,8 @@ paneles <- lapply(specs, function(s) {
                     seed = SEMILLA, segment.size = 0.2) +
     scale_x_continuous(labels = num_es) +
     scale_y_continuous(labels = num_es) +
-    scale_colour_manual(values = COL_TIPO_PROV, name = "Tipo de provincia",
-                        labels = TIPO_PROV_ETIQUETA, breaks = TIPO_PROV_ORDEN) +
+    scale_colour_manual(values = COL_REGION, name = "Región",
+                        labels = REGION_ETIQUETA, breaks = REGION_ORDEN) +
     labs(x = s[[3]], y = s[[4]]) +
     tema_es()
 })

@@ -46,7 +46,7 @@ titulo("01 — Geometría del espacio de formas jurídicas")
 
 # ── Datos y cadena de exclusión propia de la geometría ──────────────────────
 d_todo <- cargar_registro(c("tipo", "clae2", "era", "estado",
-                            "provincia", "prov_type", "year"))
+                            "provincia", "region", "year"))
 cat("N del registro:", fmt_n(nrow(d_todo)), "organizaciones\n")
 stopifnot(min(d_todo$year) >= ANIO_MIN, max(d_todo$year) <= ANIO_MAX)
 
@@ -57,7 +57,7 @@ cat("  sin actividad declarada:", fmt_n(sin_clae),
 cat("N de la geometría:", fmt_n(nrow(d)), "organizaciones\n")
 
 d$era_grupo <- factor(ERA_GRUPO[as.character(d$era)], levels = ERA_GRUPO_ORDEN)
-d$prov_type <- factor(d$prov_type, levels = TIPO_PROV_ORDEN)
+d$region <- factor(d$region, levels = REGION_ORDEN)
 
 # ── Perfiles únicos ─────────────────────────────────────────────────────────
 act_todo <- d[, VARS_ACTIVAS]
@@ -195,7 +195,7 @@ sup <- do.call(rbind, lapply(VARS_SUP, function(v) {
 guardar(sup, "acm_suplementarias.csv")
 
 cat("\nsuplementarias sobre el eje 1:\n")
-for (v in c("era", "prov_type")) {
+for (v in c("era", "region")) {
   s <- sup[sup$variable == v, ]
   cat(" ", v, ":", paste(sprintf("%s %+.2f", s$categoria, s$coord1), collapse = "  "), "\n")
 }
@@ -204,7 +204,7 @@ for (v in c("era", "prov_type")) {
 # del espacio de formas sobre el territorio, jurisdicción por jurisdicción.
 jur_era <- d |>
   dplyr::filter(!is.na(era_grupo)) |>
-  dplyr::group_by(era_grupo, provincia, prov_type) |>
+  dplyr::group_by(era_grupo, provincia, region) |>
   dplyr::summarise(n = dplyr::n(),
                    coord1 = mean(d1) / sqrt(lambda[1]),
                    coord2 = mean(d2) / sqrt(lambda[2]), .groups = "drop") |>
@@ -216,7 +216,7 @@ ml <- ml[order(ml$coord1), ]
 cat("\njurisdicciones bajo Milei, eje 1 (del polo asociativo al comercial):\n")
 cat(" ", paste(sprintf("%s %+.2f", ml$provincia, ml$coord1), collapse = "  "), "\n")
 
-# ── Subnubes por tipo de provincia y era ────────────────────────────────────
+# ── Subnubes por región y era ───────────────────────────────────────────────
 momentos_subnube <- function(sub) {
   X <- as.matrix(sub[, cols_ejes])
   S <- stats::cov(X)
@@ -226,15 +226,15 @@ momentos_subnube <- function(sub) {
 
 combos <- d |>
   dplyr::filter(!is.na(era_grupo)) |>
-  dplyr::group_by(era_grupo, prov_type) |>
+  dplyr::group_by(era_grupo, region) |>
   dplyr::group_split()
 
 subnubes <- do.call(rbind, lapply(combos, function(sub) {
   m <- momentos_subnube(sub)
   data.frame(
     era_grupo    = as.character(sub$era_grupo[1]),
-    tipo_prov    = as.character(sub$prov_type[1]),
-    tipo_prov_es = unname(TIPO_PROV_ETIQUETA[as.character(sub$prov_type[1])]),
+    region    = as.character(sub$region[1]),
+    region_es = unname(REGION_ETIQUETA[as.character(sub$region[1])]),
     n            = m$n,
     centro1      = m$centro[1],
     centro2      = m$centro[2],
@@ -244,33 +244,34 @@ subnubes <- do.call(rbind, lapply(combos, function(sub) {
   )
 }))
 subnubes$era_grupo <- factor(subnubes$era_grupo, levels = ERA_GRUPO_ORDEN)
-subnubes <- subnubes[order(subnubes$era_grupo, match(subnubes$tipo_prov, TIPO_PROV_ORDEN)), ]
+subnubes <- subnubes[order(subnubes$era_grupo, match(subnubes$region, REGION_ORDEN)), ]
 
-# Separación entre el centroide metropolitano y el periférico sobre el eje 1,
-# expresada en desviaciones de la nube: una diferencia de centroides sólo dice
-# algo comparada con la dispersión del espacio en que se mide.
+# Amplitud entre los centroides regionales sobre el eje 1 (el más alto menos el
+# más bajo), expresada en desviaciones de la nube: una diferencia de centroides
+# sólo dice algo comparada con la dispersión del espacio en que se mide.
 sep <- do.call(rbind, lapply(ERA_GRUPO_ORDEN, function(e) {
   s <- subnubes[subnubes$era_grupo == e, ]
-  m <- s$centro1[s$tipo_prov == "metropolitan"]
-  p <- s$centro1[s$tipo_prov == "peripheral"]
-  data.frame(era_grupo = e, centro_metro = m, centro_perif = p,
-             separacion = m - p, separacion_sd = (m - p) / sd_nube[1])
+  data.frame(era_grupo = e,
+             region_max = s$region[which.max(s$centro1)],
+             region_min = s$region[which.min(s$centro1)],
+             amplitud = max(s$centro1) - min(s$centro1),
+             amplitud_sd = (max(s$centro1) - min(s$centro1)) / sd_nube[1])
 }))
-subnubes$separacion_sd <- sep$separacion_sd[match(subnubes$era_grupo, sep$era_grupo)]
+subnubes$amplitud_sd <- sep$amplitud_sd[match(subnubes$era_grupo, sep$era_grupo)]
 guardar(subnubes, "acm_subnubes.csv")
 
 cat("\ncentroides e inercias de clase:\n")
 for (i in seq_len(nrow(subnubes))) {
   cat(sprintf("  %-13s %-14s n=%9s  centro (%+.3f, %+.3f)  inercia %.3f\n",
-              subnubes$era_grupo[i], subnubes$tipo_prov_es[i],
+              subnubes$era_grupo[i], subnubes$region_es[i],
               fmt_n(subnubes$n[i]), subnubes$centro1[i], subnubes$centro2[i],
               subnubes$inercia[i]))
 }
-cat("\nseparación metropolitana-periférica sobre el eje 1, en desviaciones de la nube:\n")
+cat("\namplitud entre centroides regionales sobre el eje 1, en desviaciones de la nube:\n")
 for (i in seq_len(nrow(sep))) {
-  cat(sprintf("  %-13s %+.3f frente a %+.3f   diferencia %.3f = %.2f desviaciones\n",
-              sep$era_grupo[i], sep$centro_metro[i], sep$centro_perif[i],
-              sep$separacion[i], sep$separacion_sd[i]))
+  cat(sprintf("  %-13s %s a %s   amplitud %.3f = %.2f desviaciones\n",
+              sep$era_grupo[i], sep$region_min[i], sep$region_max[i],
+              sep$amplitud[i], sep$amplitud_sd[i]))
 }
 
 # ── Elipses de concentración (kappa = 2) ────────────────────────────────────
@@ -290,7 +291,7 @@ elipses <- do.call(rbind, lapply(combos, function(sub) {
   m <- momentos_subnube(sub)
   e <- puntos_elipse(m$centro, m$S)
   e$era_grupo <- as.character(sub$era_grupo[1])
-  e$tipo_prov <- as.character(sub$prov_type[1])
+  e$region <- as.character(sub$region[1])
   e
 }))
 elipses$era_grupo <- factor(elipses$era_grupo, levels = ERA_GRUPO_ORDEN)
@@ -303,7 +304,7 @@ cat(sprintf("\ncobertura de la elipse kappa = %d: %.1f%% de las observaciones\n"
 set.seed(SEMILLA)
 n_puntos <- 40000L
 sel <- sample.int(nrow(d), min(n_puntos, nrow(d)))
-nube <- d[sel, c("tipo", "clae_sec", "era", "provincia", "prov_type", "d1", "d2")]
+nube <- d[sel, c("tipo", "clae_sec", "era", "provincia", "region", "d1", "d2")]
 names(nube)[match(c("d1", "d2"), names(nube))] <- c("dim1", "dim2")
 arrow::write_parquet(nube, file.path(SALIDAS, "acm_nube_individuos.parquet"))
 cat("  guardado: acm_nube_individuos.parquet (", nrow(nube), "puntos )\n")
@@ -311,22 +312,23 @@ cat("  guardado: acm_nube_individuos.parquet (", nrow(nube), "puntos )\n")
 # ── Distribución territorial de las formas ──────────────────────────────────
 # Se computa sobre el registro completo, porque no depende de la geometría.
 territorio <- d_todo |>
-  dplyr::count(tipo, prov_type) |>
-  tidyr::pivot_wider(names_from = prov_type, values_from = n, values_fill = 0) |>
-  dplyr::mutate(total = metropolitan + intermediate + peripheral,
-                pct_metropolitana = 100 * metropolitan / total) |>
-  dplyr::arrange(dplyr::desc(pct_metropolitana))
-guardar(as.data.frame(territorio), "acm_formas_por_tipo_provincia.csv")
+  dplyr::mutate(mayor = ifelse(provincia %in% CUATRO_MAYORES, "cuatro_mayores", "resto")) |>
+  dplyr::count(tipo, mayor) |>
+  tidyr::pivot_wider(names_from = mayor, values_from = n, values_fill = 0) |>
+  dplyr::mutate(total = cuatro_mayores + resto,
+                pct_cuatro_mayores = 100 * cuatro_mayores / total) |>
+  dplyr::arrange(dplyr::desc(pct_cuatro_mayores))
+guardar(as.data.frame(territorio), "acm_formas_cuatro_mayores.csv")
 
-cat("\nconcentración metropolitana por forma jurídica (registro completo):\n")
+cat("\nconcentración por forma jurídica en las cuatro jurisdicciones mayores (registro completo):\n")
 for (i in seq_len(nrow(territorio))) {
-  cat(sprintf("  %-8s %5.1f%% en provincias metropolitanas  (n = %s)\n",
-              territorio$tipo[i], territorio$pct_metropolitana[i],
+  cat(sprintf("  %-8s %5.1f%% en CABA, Buenos Aires, Córdoba y Santa Fe  (n = %s)\n",
+              territorio$tipo[i], territorio$pct_cuatro_mayores[i],
               fmt_n(territorio$total[i])))
 }
 
-pct_metro_registro <- 100 * sum(d_todo$prov_type == "metropolitan") / nrow(d_todo)
-cat(sprintf("\nlas cuatro jurisdicciones metropolitanas reúnen el %.1f%% del registro\n",
-            pct_metro_registro))
+pct_mayores_registro <- 100 * mean(d_todo$provincia %in% CUATRO_MAYORES)
+cat(sprintf("\nlas cuatro jurisdicciones mayores reúnen el %.1f%% del registro\n",
+            pct_mayores_registro))
 
 cat("\nlisto.\n")

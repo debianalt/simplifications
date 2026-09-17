@@ -84,12 +84,33 @@ BLOQUE <- c(
   Fund = "patrimonial", Otra = "patrimonial"
 )
 
-TIPO_PROV_ETIQUETA <- c(
-  metropolitan = "Metropolitana",
-  intermediate = "Intermedia",
-  peripheral   = "Periférica"
+# Regiones estadísticas del INDEC. Es la única agrupación de jurisdicciones que
+# usa el análisis, y sólo para ordenar la presentación (subnubes de la figura 2,
+# cuadros S5 y S7b, colores de los nombres en las figuras 3, 5 y S1). Los índices
+# provinciales y el shift-share se computan por jurisdicción. La tipología
+# metropolitana / intermedia / periférica salió el 17 sep 2026: no existe como
+# categoría en Argentina y sus predicciones no encontraron apoyo.
+REGION <- c(
+  "Buenos Aires" = "pampeana", "CABA" = "pampeana", "Córdoba" = "pampeana",
+  "Entre Ríos" = "pampeana", "La Pampa" = "pampeana", "Santa Fe" = "pampeana",
+  "Catamarca" = "noa", "Jujuy" = "noa", "La Rioja" = "noa", "Salta" = "noa",
+  "Santiago del Estero" = "noa", "Tucumán" = "noa",
+  "Chaco" = "nea", "Corrientes" = "nea", "Formosa" = "nea", "Misiones" = "nea",
+  "Mendoza" = "cuyo", "San Juan" = "cuyo", "San Luis" = "cuyo",
+  "Chubut" = "patagonia", "Neuquén" = "patagonia", "Río Negro" = "patagonia",
+  "Santa Cruz" = "patagonia", "Tierra del Fuego" = "patagonia"
 )
-TIPO_PROV_ORDEN <- c("metropolitan", "intermediate", "peripheral")
+REGION_ETIQUETA <- c(
+  pampeana  = "Pampeana",
+  noa       = "Noroeste",
+  nea       = "Noreste",
+  cuyo      = "Cuyo",
+  patagonia = "Patagonia"
+)
+REGION_ORDEN <- names(REGION_ETIQUETA)
+# Las cuatro jurisdicciones de mayor peso demográfico y organizacional: reúnen
+# tres cuartas partes del registro. Es un dato, no una clase.
+CUATRO_MAYORES <- c("CABA", "Buenos Aires", "Córdoba", "Santa Fe")
 
 # Variables activas del análisis geométrico. La era política salió del conjunto
 # activo el 8 sep 2026: aportaba el 38,7% del primer eje y la SAS existe desde
@@ -100,7 +121,7 @@ TIPO_PROV_ORDEN <- c("metropolitan", "intermediate", "peripheral")
 # activas las tasas modificadas coinciden con la inercia del análisis de
 # correspondencias de la tabla forma jurídica × sección de actividad.
 VARS_ACTIVAS <- c("tipo", "clae_sec")
-VARS_SUP     <- c("era", "estado", "prov_type", "provincia")
+VARS_SUP     <- c("era", "estado", "region", "provincia")
 
 # Secciones de la Clasificación de Actividades Económicas, por rango de dos
 # dígitos. La Z reúne los códigos que no caen en ninguna sección declarada.
@@ -129,12 +150,19 @@ SEMILLA <- 42L
 
 #' Carga el registro depurado con las columnas pedidas.
 cargar_registro <- function(columnas = NULL) {
+  # La región no está en el parquet: se deriva de la provincia
+  pedir <- setdiff(columnas, "region")
+  if (!is.null(columnas) && "region" %in% columnas) pedir <- union(pedir, "provincia")
   d <- if (is.null(columnas)) {
     arrow::read_parquet(PARQUET)
   } else {
-    arrow::read_parquet(PARQUET, col_select = all_of(columnas))
+    arrow::read_parquet(PARQUET, col_select = all_of(pedir))
   }
   d <- as.data.frame(d)
+  if ("provincia" %in% names(d)) {
+    d$region <- unname(REGION[d$provincia])
+    stopifnot(!anyNA(d$region))
+  }
   if ("tipo" %in% names(d)) d$bloque <- unname(BLOQUE[d$tipo])
   if ("era" %in% names(d)) d$era <- factor(d$era, levels = ERAS)
   if ("clae2" %in% names(d)) d$clae_sec <- seccion_clae(d$clae2)

@@ -1,5 +1,7 @@
-| Tipo de provincia | % asociativo, kirchnerismo | % asociativo, era Milei | Proporción retenida |
+| Región | % asociativo, kirchnerismo | % asociativo, era Milei | Proporción retenida |
 |---|---|---|---|
-| Metropolitana | 12,9 | 7,2 | 0,55 |
-| Intermedia | 24,7 | 7,8 | 0,32 |
-| Periférica | 44,9 | 17,7 | 0,39 |
+| Pampeana | 13,6 | 7,3 | 0,54 |
+| Noroeste | 38,5 | 13,9 | 0,36 |
+| Noreste | 42,3 | 9,8 | 0,23 |
+| Cuyo | 17,1 | 6,0 | 0,35 |
+| Patagonia | 27,4 | 9,5 | 0,35 |

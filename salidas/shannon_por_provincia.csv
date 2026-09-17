@@ -1,193 +1,193 @@
-"provincia","prov_type","era","H","n"
-"Buenos Aires","metropolitan","pre1990",1.42993202447411,49823
-"Buenos Aires","metropolitan","menem",1.35117500094962,49249
-"Buenos Aires","metropolitan","crisis",1.34434496625123,16002
-"Buenos Aires","metropolitan","n_kirchner",1.29419829251904,39274
-"Buenos Aires","metropolitan","c_kirchner",1.40544781565087,61569
-"Buenos Aires","metropolitan","macri",1.61095116517622,31845
-"Buenos Aires","metropolitan","fernandez",1.67416881066984,32331
-"Buenos Aires","metropolitan","milei",1.43540772433627,13933
-"CABA","metropolitan","pre1990",1.09781588512777,95555
-"CABA","metropolitan","menem",1.02774098559433,112673
-"CABA","metropolitan","crisis",1.08412598596779,25451
-"CABA","metropolitan","n_kirchner",1.02390679422291,48911
-"CABA","metropolitan","c_kirchner",0.979317253833176,61425
-"CABA","metropolitan","macri",1.38121722333389,40263
-"CABA","metropolitan","fernandez",1.19050007213036,37462
-"CABA","metropolitan","milei",1.18399513807928,21214
-"Catamarca","peripheral","pre1990",1.26351908234471,764
-"Catamarca","peripheral","menem",1.28697759339331,1164
-"Catamarca","peripheral","crisis",1.26663623598504,234
-"Catamarca","peripheral","n_kirchner",1.29091766841514,620
-"Catamarca","peripheral","c_kirchner",1.27214585826956,1039
-"Catamarca","peripheral","macri",1.1710342368772,466
-"Catamarca","peripheral","fernandez",1.43519325139584,684
-"Catamarca","peripheral","milei",1.16983533457457,280
-"Chaco","peripheral","pre1990",1.4386068447081,2187
-"Chaco","peripheral","menem",1.22360053573117,2859
-"Chaco","peripheral","crisis",1.30804166798987,676
-"Chaco","peripheral","n_kirchner",1.48559700677637,1622
-"Chaco","peripheral","c_kirchner",1.5396836059723,3923
-"Chaco","peripheral","macri",1.79514340831162,2193
-"Chaco","peripheral","fernandez",1.54804964740909,3801
-"Chaco","peripheral","milei",1.23793257134151,701
-"Chubut","intermediate","pre1990",1.47465096975406,1481
-"Chubut","intermediate","menem",1.3285336523185,2223
-"Chubut","intermediate","crisis",1.31445960165172,622
-"Chubut","intermediate","n_kirchner",1.23668672306921,1684
-"Chubut","intermediate","c_kirchner",1.35999994777769,2646
-"Chubut","intermediate","macri",1.66565498491671,1767
-"Chubut","intermediate","fernandez",1.70933562284707,2026
-"Chubut","intermediate","milei",1.40865718324765,831
-"Corrientes","peripheral","pre1990",1.46179971699398,2200
-"Corrientes","peripheral","menem",1.35920829332924,2209
-"Corrientes","peripheral","crisis",1.54988383089365,542
-"Corrientes","peripheral","n_kirchner",1.47090244792414,1664
-"Corrientes","peripheral","c_kirchner",1.49317172264988,3144
-"Corrientes","peripheral","macri",1.67606682943807,1844
-"Corrientes","peripheral","fernandez",1.49364486498372,2220
-"Corrientes","peripheral","milei",1.44097195757025,479
-"Córdoba","metropolitan","pre1990",1.46412344224189,12534
-"Córdoba","metropolitan","menem",1.25897298314347,11744
-"Córdoba","metropolitan","crisis",1.33584895162111,4093
-"Córdoba","metropolitan","n_kirchner",1.24942216385202,11454
-"Córdoba","metropolitan","c_kirchner",1.28250984234947,16630
-"Córdoba","metropolitan","macri",1.52916730412542,12826
-"Córdoba","metropolitan","fernandez",1.18756054696412,18608
-"Córdoba","metropolitan","milei",0.940511140317236,9001
-"Entre Ríos","intermediate","pre1990",1.46922859826153,3676
-"Entre Ríos","intermediate","menem",1.42582032532458,2959
-"Entre Ríos","intermediate","crisis",1.41028058602241,916
-"Entre Ríos","intermediate","n_kirchner",1.42296002929461,2370
-"Entre Ríos","intermediate","c_kirchner",1.52483201441019,3770
-"Entre Ríos","intermediate","macri",1.698086138237,1964
-"Entre Ríos","intermediate","fernandez",1.78959492026671,2389
-"Entre Ríos","intermediate","milei",1.6145285009335,828
-"Formosa","peripheral","pre1990",1.37488189291238,697
-"Formosa","peripheral","menem",1.34207036952739,1043
-"Formosa","peripheral","crisis",0.995649425253101,361
-"Formosa","peripheral","n_kirchner",1.21176699274261,850
-"Formosa","peripheral","c_kirchner",1.27682815726634,1020
-"Formosa","peripheral","macri",1.54051364511881,461
-"Formosa","peripheral","fernandez",1.41760530016503,677
-"Formosa","peripheral","milei",1.53764618361726,245
-"Jujuy","peripheral","pre1990",1.3127545315694,1063
-"Jujuy","peripheral","menem",1.48445696657577,1635
-"Jujuy","peripheral","crisis",1.40417257536165,508
-"Jujuy","peripheral","n_kirchner",1.40767225985038,1414
-"Jujuy","peripheral","c_kirchner",1.40958354086112,1919
-"Jujuy","peripheral","macri",1.70551386686219,929
-"Jujuy","peripheral","fernandez",1.52840079574624,1077
-"Jujuy","peripheral","milei",1.33690246260843,426
-"La Pampa","intermediate","pre1990",1.48742243034489,1533
-"La Pampa","intermediate","menem",1.46395839900268,1339
-"La Pampa","intermediate","crisis",1.54112394138332,431
-"La Pampa","intermediate","n_kirchner",1.41478245797371,1019
-"La Pampa","intermediate","c_kirchner",1.31945993046263,1426
-"La Pampa","intermediate","macri",1.55720525133636,993
-"La Pampa","intermediate","fernandez",1.69006627731551,1028
-"La Pampa","intermediate","milei",1.48080884826388,444
-"La Rioja","peripheral","pre1990",1.31737839691105,844
-"La Rioja","peripheral","menem",1.48344516108638,1230
-"La Rioja","peripheral","crisis",1.37645398683745,261
-"La Rioja","peripheral","n_kirchner",1.30154636633298,674
-"La Rioja","peripheral","c_kirchner",1.5359503519477,1207
-"La Rioja","peripheral","macri",1.43839024793399,380
-"La Rioja","peripheral","fernandez",1.68257602228143,598
-"La Rioja","peripheral","milei",1.32660125588723,194
-"Mendoza","intermediate","pre1990",1.46117390062911,6216
-"Mendoza","intermediate","menem",1.3918401761639,8438
-"Mendoza","intermediate","crisis",1.08696497216352,2880
-"Mendoza","intermediate","n_kirchner",0.938856537429219,7814
-"Mendoza","intermediate","c_kirchner",1.09268313974757,9735
-"Mendoza","intermediate","macri",1.55506601134149,5820
-"Mendoza","intermediate","fernandez",1.15741572379528,8583
-"Mendoza","intermediate","milei",0.689697828926083,4166
-"Misiones","peripheral","pre1990",1.42656717467914,2406
-"Misiones","peripheral","menem",1.16458517568762,3050
-"Misiones","peripheral","crisis",1.2499634158116,971
-"Misiones","peripheral","n_kirchner",1.36746985408097,2328
-"Misiones","peripheral","c_kirchner",1.41735850070511,2722
-"Misiones","peripheral","macri",1.66437542627038,881
-"Misiones","peripheral","fernandez",1.73461666837652,1467
-"Misiones","peripheral","milei",1.43377128240241,445
-"Neuquén","intermediate","pre1990",1.44080017785859,1578
-"Neuquén","intermediate","menem",1.27858333541871,2418
-"Neuquén","intermediate","crisis",1.31433061498066,661
-"Neuquén","intermediate","n_kirchner",1.16671734970708,1845
-"Neuquén","intermediate","c_kirchner",1.26137836183822,2605
-"Neuquén","intermediate","macri",1.51792549585448,1702
-"Neuquén","intermediate","fernandez",1.4359432949306,1994
-"Neuquén","intermediate","milei",1.09149531524994,1098
-"Río Negro","intermediate","pre1990",1.47509600709123,2321
-"Río Negro","intermediate","menem",1.38043567586185,2533
-"Río Negro","intermediate","crisis",1.52203966037758,740
-"Río Negro","intermediate","n_kirchner",1.39669895935195,1909
-"Río Negro","intermediate","c_kirchner",1.37740161900219,2979
-"Río Negro","intermediate","macri",1.59825677246318,2209
-"Río Negro","intermediate","fernandez",1.4230346236913,2309
-"Río Negro","intermediate","milei",1.02624668247313,1061
-"Salta","intermediate","pre1990",1.3991328607465,2074
-"Salta","intermediate","menem",1.32014540756965,3269
-"Salta","intermediate","crisis",1.42321677208194,1083
-"Salta","intermediate","n_kirchner",1.37828580317428,2548
-"Salta","intermediate","c_kirchner",1.39991579748217,3890
-"Salta","intermediate","macri",1.61531325996609,1975
-"Salta","intermediate","fernandez",1.58665690327372,3611
-"Salta","intermediate","milei",1.22235706307365,1456
-"San Juan","intermediate","pre1990",1.38402778699523,2118
-"San Juan","intermediate","menem",1.16931085074423,2809
-"San Juan","intermediate","crisis",1.39232123120687,735
-"San Juan","intermediate","n_kirchner",1.3984495843419,1784
-"San Juan","intermediate","c_kirchner",1.23062047640933,2318
-"San Juan","intermediate","macri",1.53293903508256,1476
-"San Juan","intermediate","fernandez",1.26648931445735,1911
-"San Juan","intermediate","milei",0.690750856174666,816
-"San Luis","intermediate","pre1990",1.14276241447402,1948
-"San Luis","intermediate","menem",1.28822618353521,1699
-"San Luis","intermediate","crisis",1.12563700739778,874
-"San Luis","intermediate","n_kirchner",1.18984868188911,1454
-"San Luis","intermediate","c_kirchner",1.36375970488288,2774
-"San Luis","intermediate","macri",1.48378298223037,1336
-"San Luis","intermediate","fernandez",1.4354500441587,1503
-"San Luis","intermediate","milei",1.07965141941252,798
-"Santa Cruz","intermediate","pre1990",1.45896218711072,644
-"Santa Cruz","intermediate","menem",1.42177545239904,897
-"Santa Cruz","intermediate","crisis",1.43782058041064,398
-"Santa Cruz","intermediate","n_kirchner",1.47359331239305,967
-"Santa Cruz","intermediate","c_kirchner",1.47832179631214,1179
-"Santa Cruz","intermediate","macri",1.7301174757422,605
-"Santa Cruz","intermediate","fernandez",1.6476120345362,771
-"Santa Cruz","intermediate","milei",1.46586976263366,374
-"Santa Fe","metropolitan","pre1990",1.43466064505819,17706
-"Santa Fe","metropolitan","menem",1.16185790074564,16542
-"Santa Fe","metropolitan","crisis",1.28597933713857,4857
-"Santa Fe","metropolitan","n_kirchner",1.23280276243393,10963
-"Santa Fe","metropolitan","c_kirchner",1.27167563292706,13973
-"Santa Fe","metropolitan","macri",1.60460360098455,9409
-"Santa Fe","metropolitan","fernandez",1.71169790149865,9964
-"Santa Fe","metropolitan","milei",1.5709990684794,3720
-"Santiago del Estero","peripheral","pre1990",1.42179280079034,1140
-"Santiago del Estero","peripheral","menem",1.39949071706557,1902
-"Santiago del Estero","peripheral","crisis",1.46331655592477,610
-"Santiago del Estero","peripheral","n_kirchner",1.34065878763492,1595
-"Santiago del Estero","peripheral","c_kirchner",1.37158658396592,2349
-"Santiago del Estero","peripheral","macri",1.23433011030967,1016
-"Santiago del Estero","peripheral","fernandez",1.47173082917896,1981
-"Santiago del Estero","peripheral","milei",1.43712838766632,700
-"Tierra del Fuego","intermediate","pre1990",1.12318334332816,582
-"Tierra del Fuego","intermediate","menem",1.28230395730607,1060
-"Tierra del Fuego","intermediate","crisis",1.35969474545688,375
-"Tierra del Fuego","intermediate","n_kirchner",1.22240140703938,902
-"Tierra del Fuego","intermediate","c_kirchner",1.34168858142458,876
-"Tierra del Fuego","intermediate","macri",1.70458230644506,700
-"Tierra del Fuego","intermediate","fernandez",1.43131634051685,1103
-"Tierra del Fuego","intermediate","milei",0.956348737205836,491
-"Tucumán","intermediate","pre1990",1.45630976711793,2981
-"Tucumán","intermediate","menem",1.35284901848989,4395
-"Tucumán","intermediate","crisis",1.32209516518829,1826
-"Tucumán","intermediate","n_kirchner",1.36929652968912,3137
-"Tucumán","intermediate","c_kirchner",1.36793642000316,4438
-"Tucumán","intermediate","macri",1.57574477174146,2185
-"Tucumán","intermediate","fernandez",1.52246928502896,3465
-"Tucumán","intermediate","milei",1.05978439748927,1660
+"provincia","region","era","H","n"
+"Buenos Aires","pampeana","pre1990",1.42993202447411,49823
+"Buenos Aires","pampeana","menem",1.35117500094962,49249
+"Buenos Aires","pampeana","crisis",1.34434496625123,16002
+"Buenos Aires","pampeana","n_kirchner",1.29419829251904,39274
+"Buenos Aires","pampeana","c_kirchner",1.40544781565087,61569
+"Buenos Aires","pampeana","macri",1.61095116517622,31845
+"Buenos Aires","pampeana","fernandez",1.67416881066984,32331
+"Buenos Aires","pampeana","milei",1.43540772433627,13933
+"CABA","pampeana","pre1990",1.09781588512777,95555
+"CABA","pampeana","menem",1.02774098559433,112673
+"CABA","pampeana","crisis",1.08412598596779,25451
+"CABA","pampeana","n_kirchner",1.02390679422291,48911
+"CABA","pampeana","c_kirchner",0.979317253833176,61425
+"CABA","pampeana","macri",1.38121722333389,40263
+"CABA","pampeana","fernandez",1.19050007213036,37462
+"CABA","pampeana","milei",1.18399513807928,21214
+"Catamarca","noa","pre1990",1.26351908234471,764
+"Catamarca","noa","menem",1.28697759339331,1164
+"Catamarca","noa","crisis",1.26663623598504,234
+"Catamarca","noa","n_kirchner",1.29091766841514,620
+"Catamarca","noa","c_kirchner",1.27214585826956,1039
+"Catamarca","noa","macri",1.1710342368772,466
+"Catamarca","noa","fernandez",1.43519325139584,684
+"Catamarca","noa","milei",1.16983533457457,280
+"Chaco","nea","pre1990",1.4386068447081,2187
+"Chaco","nea","menem",1.22360053573117,2859
+"Chaco","nea","crisis",1.30804166798987,676
+"Chaco","nea","n_kirchner",1.48559700677637,1622
+"Chaco","nea","c_kirchner",1.5396836059723,3923
+"Chaco","nea","macri",1.79514340831162,2193
+"Chaco","nea","fernandez",1.54804964740909,3801
+"Chaco","nea","milei",1.23793257134151,701
+"Chubut","patagonia","pre1990",1.47465096975406,1481
+"Chubut","patagonia","menem",1.3285336523185,2223
+"Chubut","patagonia","crisis",1.31445960165172,622
+"Chubut","patagonia","n_kirchner",1.23668672306921,1684
+"Chubut","patagonia","c_kirchner",1.35999994777769,2646
+"Chubut","patagonia","macri",1.66565498491671,1767
+"Chubut","patagonia","fernandez",1.70933562284707,2026
+"Chubut","patagonia","milei",1.40865718324765,831
+"Corrientes","nea","pre1990",1.46179971699398,2200
+"Corrientes","nea","menem",1.35920829332924,2209
+"Corrientes","nea","crisis",1.54988383089365,542
+"Corrientes","nea","n_kirchner",1.47090244792414,1664
+"Corrientes","nea","c_kirchner",1.49317172264988,3144
+"Corrientes","nea","macri",1.67606682943807,1844
+"Corrientes","nea","fernandez",1.49364486498372,2220
+"Corrientes","nea","milei",1.44097195757025,479
+"Córdoba","pampeana","pre1990",1.46412344224189,12534
+"Córdoba","pampeana","menem",1.25897298314347,11744
+"Córdoba","pampeana","crisis",1.33584895162111,4093
+"Córdoba","pampeana","n_kirchner",1.24942216385202,11454
+"Córdoba","pampeana","c_kirchner",1.28250984234947,16630
+"Córdoba","pampeana","macri",1.52916730412542,12826
+"Córdoba","pampeana","fernandez",1.18756054696412,18608
+"Córdoba","pampeana","milei",0.940511140317236,9001
+"Entre Ríos","pampeana","pre1990",1.46922859826153,3676
+"Entre Ríos","pampeana","menem",1.42582032532458,2959
+"Entre Ríos","pampeana","crisis",1.41028058602241,916
+"Entre Ríos","pampeana","n_kirchner",1.42296002929461,2370
+"Entre Ríos","pampeana","c_kirchner",1.52483201441019,3770
+"Entre Ríos","pampeana","macri",1.698086138237,1964
+"Entre Ríos","pampeana","fernandez",1.78959492026671,2389
+"Entre Ríos","pampeana","milei",1.6145285009335,828
+"Formosa","nea","pre1990",1.37488189291238,697
+"Formosa","nea","menem",1.34207036952739,1043
+"Formosa","nea","crisis",0.995649425253101,361
+"Formosa","nea","n_kirchner",1.21176699274261,850
+"Formosa","nea","c_kirchner",1.27682815726634,1020
+"Formosa","nea","macri",1.54051364511881,461
+"Formosa","nea","fernandez",1.41760530016503,677
+"Formosa","nea","milei",1.53764618361726,245
+"Jujuy","noa","pre1990",1.3127545315694,1063
+"Jujuy","noa","menem",1.48445696657577,1635
+"Jujuy","noa","crisis",1.40417257536165,508
+"Jujuy","noa","n_kirchner",1.40767225985038,1414
+"Jujuy","noa","c_kirchner",1.40958354086112,1919
+"Jujuy","noa","macri",1.70551386686219,929
+"Jujuy","noa","fernandez",1.52840079574624,1077
+"Jujuy","noa","milei",1.33690246260843,426
+"La Pampa","pampeana","pre1990",1.48742243034489,1533
+"La Pampa","pampeana","menem",1.46395839900268,1339
+"La Pampa","pampeana","crisis",1.54112394138332,431
+"La Pampa","pampeana","n_kirchner",1.41478245797371,1019
+"La Pampa","pampeana","c_kirchner",1.31945993046263,1426
+"La Pampa","pampeana","macri",1.55720525133636,993
+"La Pampa","pampeana","fernandez",1.69006627731551,1028
+"La Pampa","pampeana","milei",1.48080884826388,444
+"La Rioja","noa","pre1990",1.31737839691105,844
+"La Rioja","noa","menem",1.48344516108638,1230
+"La Rioja","noa","crisis",1.37645398683745,261
+"La Rioja","noa","n_kirchner",1.30154636633298,674
+"La Rioja","noa","c_kirchner",1.5359503519477,1207
+"La Rioja","noa","macri",1.43839024793399,380
+"La Rioja","noa","fernandez",1.68257602228143,598
+"La Rioja","noa","milei",1.32660125588723,194
+"Mendoza","cuyo","pre1990",1.46117390062911,6216
+"Mendoza","cuyo","menem",1.3918401761639,8438
+"Mendoza","cuyo","crisis",1.08696497216352,2880
+"Mendoza","cuyo","n_kirchner",0.938856537429219,7814
+"Mendoza","cuyo","c_kirchner",1.09268313974757,9735
+"Mendoza","cuyo","macri",1.55506601134149,5820
+"Mendoza","cuyo","fernandez",1.15741572379528,8583
+"Mendoza","cuyo","milei",0.689697828926083,4166
+"Misiones","nea","pre1990",1.42656717467914,2406
+"Misiones","nea","menem",1.16458517568762,3050
+"Misiones","nea","crisis",1.2499634158116,971
+"Misiones","nea","n_kirchner",1.36746985408097,2328
+"Misiones","nea","c_kirchner",1.41735850070511,2722
+"Misiones","nea","macri",1.66437542627038,881
+"Misiones","nea","fernandez",1.73461666837652,1467
+"Misiones","nea","milei",1.43377128240241,445
+"Neuquén","patagonia","pre1990",1.44080017785859,1578
+"Neuquén","patagonia","menem",1.27858333541871,2418
+"Neuquén","patagonia","crisis",1.31433061498066,661
+"Neuquén","patagonia","n_kirchner",1.16671734970708,1845
+"Neuquén","patagonia","c_kirchner",1.26137836183822,2605
+"Neuquén","patagonia","macri",1.51792549585448,1702
+"Neuquén","patagonia","fernandez",1.4359432949306,1994
+"Neuquén","patagonia","milei",1.09149531524994,1098
+"Río Negro","patagonia","pre1990",1.47509600709123,2321
+"Río Negro","patagonia","menem",1.38043567586185,2533
+"Río Negro","patagonia","crisis",1.52203966037758,740
+"Río Negro","patagonia","n_kirchner",1.39669895935195,1909
+"Río Negro","patagonia","c_kirchner",1.37740161900219,2979
+"Río Negro","patagonia","macri",1.59825677246318,2209
+"Río Negro","patagonia","fernandez",1.4230346236913,2309
+"Río Negro","patagonia","milei",1.02624668247313,1061
+"Salta","noa","pre1990",1.3991328607465,2074
+"Salta","noa","menem",1.32014540756965,3269
+"Salta","noa","crisis",1.42321677208194,1083
+"Salta","noa","n_kirchner",1.37828580317428,2548
+"Salta","noa","c_kirchner",1.39991579748217,3890
+"Salta","noa","macri",1.61531325996609,1975
+"Salta","noa","fernandez",1.58665690327372,3611
+"Salta","noa","milei",1.22235706307365,1456
+"San Juan","cuyo","pre1990",1.38402778699523,2118
+"San Juan","cuyo","menem",1.16931085074423,2809
+"San Juan","cuyo","crisis",1.39232123120687,735
+"San Juan","cuyo","n_kirchner",1.3984495843419,1784
+"San Juan","cuyo","c_kirchner",1.23062047640933,2318
+"San Juan","cuyo","macri",1.53293903508256,1476
+"San Juan","cuyo","fernandez",1.26648931445735,1911
+"San Juan","cuyo","milei",0.690750856174666,816
+"San Luis","cuyo","pre1990",1.14276241447402,1948
+"San Luis","cuyo","menem",1.28822618353521,1699
+"San Luis","cuyo","crisis",1.12563700739778,874
+"San Luis","cuyo","n_kirchner",1.18984868188911,1454
+"San Luis","cuyo","c_kirchner",1.36375970488288,2774
+"San Luis","cuyo","macri",1.48378298223037,1336
+"San Luis","cuyo","fernandez",1.4354500441587,1503
+"San Luis","cuyo","milei",1.07965141941252,798
+"Santa Cruz","patagonia","pre1990",1.45896218711072,644
+"Santa Cruz","patagonia","menem",1.42177545239904,897
+"Santa Cruz","patagonia","crisis",1.43782058041064,398
+"Santa Cruz","patagonia","n_kirchner",1.47359331239305,967
+"Santa Cruz","patagonia","c_kirchner",1.47832179631214,1179
+"Santa Cruz","patagonia","macri",1.7301174757422,605
+"Santa Cruz","patagonia","fernandez",1.6476120345362,771
+"Santa Cruz","patagonia","milei",1.46586976263366,374
+"Santa Fe","pampeana","pre1990",1.43466064505819,17706
+"Santa Fe","pampeana","menem",1.16185790074564,16542
+"Santa Fe","pampeana","crisis",1.28597933713857,4857
+"Santa Fe","pampeana","n_kirchner",1.23280276243393,10963
+"Santa Fe","pampeana","c_kirchner",1.27167563292706,13973
+"Santa Fe","pampeana","macri",1.60460360098455,9409
+"Santa Fe","pampeana","fernandez",1.71169790149865,9964
+"Santa Fe","pampeana","milei",1.5709990684794,3720
+"Santiago del Estero","noa","pre1990",1.42179280079034,1140
+"Santiago del Estero","noa","menem",1.39949071706557,1902
+"Santiago del Estero","noa","crisis",1.46331655592477,610
+"Santiago del Estero","noa","n_kirchner",1.34065878763492,1595
+"Santiago del Estero","noa","c_kirchner",1.37158658396592,2349
+"Santiago del Estero","noa","macri",1.23433011030967,1016
+"Santiago del Estero","noa","fernandez",1.47173082917896,1981
+"Santiago del Estero","noa","milei",1.43712838766632,700
+"Tierra del Fuego","patagonia","pre1990",1.12318334332816,582
+"Tierra del Fuego","patagonia","menem",1.28230395730607,1060
+"Tierra del Fuego","patagonia","crisis",1.35969474545688,375
+"Tierra del Fuego","patagonia","n_kirchner",1.22240140703938,902
+"Tierra del Fuego","patagonia","c_kirchner",1.34168858142458,876
+"Tierra del Fuego","patagonia","macri",1.70458230644506,700
+"Tierra del Fuego","patagonia","fernandez",1.43131634051685,1103
+"Tierra del Fuego","patagonia","milei",0.956348737205836,491
+"Tucumán","noa","pre1990",1.45630976711793,2981
+"Tucumán","noa","menem",1.35284901848989,4395
+"Tucumán","noa","crisis",1.32209516518829,1826
+"Tucumán","noa","n_kirchner",1.36929652968912,3137
+"Tucumán","noa","c_kirchner",1.36793642000316,4438
+"Tucumán","noa","macri",1.57574477174146,2185
+"Tucumán","noa","fernandez",1.52246928502896,3465
+"Tucumán","noa","milei",1.05978439748927,1660
