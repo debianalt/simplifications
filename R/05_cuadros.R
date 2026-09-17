@@ -106,7 +106,7 @@ for (cfg in list(list("S4", "shift_share_milei.csv"),
   ss <- ss[order(ss$diferencial_provincial), ]
   escribir(cfg[[1]],
     c("Provincia", "Tipo", "Tasa de referencia", "Tasa de comparación",
-      "Efecto nacional", "Mix estructural", "Diferencial provincial", "Residuo"),
+      "Efecto nacional", "Mix estructural", "Diferencial provincial", "SAS (%)"),
     filas_de(ss, list(
       function(r) r$provincia,
       function(r) unname(TIPO_PROV_ETIQUETA[r$prov_type]),
@@ -115,7 +115,7 @@ for (cfg in list(list("S4", "shift_share_milei.csv"),
       function(r) sgn(r$efecto_nacional, 1),
       function(r) sgn(r$mix_estructural, 1),
       function(r) sgn(r$diferencial_provincial, 1),
-      function(r) num(r$residuo, 1))))
+      function(r) num(r$pct_sas, 1))))
 }
 
 # ── S5: subnubes por tipo de provincia ───────────────────────────────────────────────────

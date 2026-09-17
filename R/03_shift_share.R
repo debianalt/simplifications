@@ -13,10 +13,22 @@
 # el provincial. El diferencial es el componente de interés: aísla la mediación
 # provincial del cambio regulatorio nacional.
 #
+# La SAS se fusiona con la SRL en una única categoría de sociedad de capital
+# cerrada antes de descomponer, como en los controles del Theil y del Shannon.
+# La razón es un artefacto de base: la forma se creó en 2017, pero 247
+# organizaciones del registro la declaran con fecha de constitución anterior
+# (sociedades transformadas que conservan la fecha original), 157 de ellas en
+# la cohorte de referencia. Tomadas como base, esas transformaciones daban a la
+# SAS un crecimiento nacional de ×947 bajo Milei, y cada una inyectaba unas 73
+# altas por año al mix estructural de su provincia, que el diferencial devolvía
+# con signo negativo (Santa Fe, con 41, recibía +2.982 de mix y −2.750 de
+# diferencial). Fusionada con la SRL, la base es la creación de sociedades de
+# capital cerradas, que existe en las 24 jurisdicciones.
+#
 # Las formas sin creaciones en la referencia dentro de una provincia carecen de
 # base para calcular una tasa de crecimiento y no reciben asignación, porque su
 # e_jk0 es cero y anula los tres términos. Eso deja un residuo igual a la tasa
-# de comparación de esas formas, que se reporta aparte.
+# de comparación de esas formas, que se reporta aparte (con la fusión es cero).
 #
 # Salidas en salidas/:
 #   shift_share_milei.csv       referencia kirchnerismo, comparación Milei
@@ -41,8 +53,11 @@ d <- cargar_registro(c("tipo", "era", "provincia", "prov_type", "year"))
 cat("N =", fmt_n(nrow(d)), "organizaciones\n")
 
 shift_share <- function(df, eras_ref, eras_comp) {
+  df0 <- df                                  # sin fusionar, para pct_sas
+  df$tipo[df$tipo == "SAS"] <- "SRL"         # sociedad de capital cerrada
   ref  <- df[df$era %in% eras_ref, ]
   comp <- df[df$era %in% eras_comp, ]
+  comp0 <- df0[df0$era %in% eras_comp, ]
   anios_ref  <- length(unique(ref$year))
   anios_comp <- length(unique(comp$year))
   stopifnot(anios_ref > 0, anios_comp > 0)
@@ -65,6 +80,7 @@ shift_share <- function(df, eras_ref, eras_comp) {
   filas <- lapply(provincias, function(p) {
     pr <- ref[ref$provincia == p, ]
     pc <- comp[comp$provincia == p, ]
+    pc0 <- comp0[comp0$provincia == p, ]
     e0 <- tasa(pr, anios_ref)
     e1 <- tasa(pc, anios_comp)
     names(e0) <- names(e1) <- formas
@@ -88,8 +104,8 @@ shift_share <- function(df, eras_ref, eras_comp) {
       total_descompuesto = NS + IM + RS,
       residuo = sum(e1[sin_base]),
       formas_sin_base = paste(formas[sin_base], collapse = "; "),
-      pct_sas = if (nrow(pc)) 100 * mean(pc$tipo == "SAS") else NA_real_,
-      pct_coop = if (nrow(pc)) 100 * mean(pc$tipo == "Coop") else NA_real_,
+      pct_sas = if (nrow(pc0)) 100 * mean(pc0$tipo == "SAS") else NA_real_,
+      pct_coop = if (nrow(pc0)) 100 * mean(pc0$tipo == "Coop") else NA_real_,
       stringsAsFactors = FALSE
     )
   })
@@ -104,6 +120,8 @@ for (cfg in list(
   titulo(paste("Referencia: kirchnerismo 2003-2015 — Comparación:", cfg$nombre))
   ss <- shift_share(d, KIRCHNERISMO, cfg$eras)
   guardar(ss, cfg$archivo)
+  cat(sprintf("  rho de Spearman entre diferencial y participación SAS: %.2f\n",
+              cor(ss$diferencial_provincial, ss$pct_sas, method = "spearman")))
 
   cat(sprintf("  signo del efecto nacional: %s en las 24 jurisdicciones\n",
               if (all(ss$efecto_nacional > 0)) "positivo" else
