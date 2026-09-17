@@ -118,6 +118,20 @@ for (cfg in list(list("S4", "shift_share_milei.csv"),
       function(r) num(r$pct_sas, 1))))
 }
 
+# ── S4c: shift-share sin la SAS ─────────────────────────────────────────────
+sc <- read.csv(file.path(SALIDAS, "shift_share_sin_sas.csv"))
+sc <- sc[order(sc$dif_milei), ]
+escribir("S4c",
+  c("Provincia", "Región", "Diferencial sin SAS, Fernández", "Diferencial sin SAS, Milei",
+    "SAS (%), Fernández", "SAS (%), Milei"),
+  filas_de(sc, list(
+    function(r) r$provincia,
+    function(r) unname(REGION_ETIQUETA[r$region]),
+    function(r) sgn(r$dif_fernandez, 1),
+    function(r) sgn(r$dif_milei, 1),
+    function(r) num(r$pct_sas_fernandez, 1),
+    function(r) num(r$pct_sas_milei, 1))))
+
 # ── S5: subnubes por región ─────────────────────────────────────────────────
 sn <- read.csv(file.path(SALIDAS, "acm_subnubes.csv"))
 sn <- sn[sn$era_grupo %in% c("Kirchnerismo", "Macri", "Fernández", "Milei"), ]

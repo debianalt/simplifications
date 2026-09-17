@@ -52,9 +52,13 @@ titulo("03 — Descomposición shift-share")
 d <- cargar_registro(c("tipo", "era", "provincia", "region", "year"))
 cat("N =", fmt_n(nrow(d)), "organizaciones\n")
 
-shift_share <- function(df, eras_ref, eras_comp) {
+shift_share <- function(df, eras_ref, eras_comp, excluir_sas = FALSE) {
   df0 <- df                                  # sin fusionar, para pct_sas
-  df$tipo[df$tipo == "SAS"] <- "SRL"         # sociedad de capital cerrada
+  if (excluir_sas) {
+    df <- df[df$tipo != "SAS", ]             # sólo las siete formas restantes
+  } else {
+    df$tipo[df$tipo == "SAS"] <- "SRL"       # sociedad de capital cerrada
+  }
   ref  <- df[df$era %in% eras_ref, ]
   comp <- df[df$era %in% eras_comp, ]
   comp0 <- df0[df0$era %in% eras_comp, ]
@@ -147,6 +151,29 @@ for (cfg in list(
   perif_pos <- ss[ss$region %in% c("nea", "noa") & ss$diferencial_provincial > 0, ]
   cat(sprintf("\n  jurisdicciones del norte con diferencial positivo: %s\n",
               if (nrow(perif_pos)) paste(perif_pos$provincia, collapse = ", ") else "ninguna"))
+}
+
+# ── Variante sin la SAS: las siete formas restantes ─────────────────────────
+# Con la SAS fusionada en la SRL, el diferencial sigue la adopción de la SAS en
+# parte por construcción, porque la SAS es la forma que creció. Excluida del
+# cálculo, la descomposición dice si la creación de las demás formas quedó por
+# encima o por debajo de la tendencia nacional en cada provincia (cuadro S4c).
+titulo("Shift-share sin la SAS (formas no simplificadas)")
+
+sin_f <- shift_share(d, KIRCHNERISMO, "fernandez", excluir_sas = TRUE)
+sin_m <- shift_share(d, KIRCHNERISMO, "milei", excluir_sas = TRUE)
+sin_sas <- merge(
+  sin_f[, c("provincia", "region", "diferencial_provincial", "pct_sas")],
+  sin_m[, c("provincia", "diferencial_provincial", "pct_sas")],
+  by = "provincia", suffixes = c("_fernandez", "_milei"))
+names(sin_sas) <- sub("^diferencial_provincial_", "dif_", names(sin_sas))
+sin_sas <- sin_sas[order(sin_sas$dif_milei), ]
+guardar(sin_sas, "shift_share_sin_sas.csv")
+for (cmp in c("fernandez", "milei")) {
+  cat(sprintf("  %-9s positivas: %s\n", cmp,
+              paste(sin_sas$provincia[sin_sas[[paste0("dif_", cmp)]] > 0], collapse = ", ")))
+  cat(sprintf("  %-9s rho de Spearman entre diferencial sin SAS y participación SAS: %.2f\n", cmp,
+              cor(sin_sas[[paste0("dif_", cmp)]], sin_sas[[paste0("pct_sas_", cmp)]], method = "spearman")))
 }
 
 # ── Cambio de signo entre ambas comparaciones ───────────────────────────────
