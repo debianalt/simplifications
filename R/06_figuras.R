@@ -4,7 +4,7 @@
 # los JPG con los nombres del envío en ES_active/figures/.
 #
 #   Fig1_biplot.jpg            nube de organizaciones y categorías activas del plano factorial
-#   Fig2_csmca_panel.jpg       elipses de concentración de subnubes por tipo de provincia
+#   Fig2_csmca_panel.jpg       elipses de concentración de subnubes por región
 #   Fig3_composicion_sas.jpg   composición por provincia bajo Milei, ordenada por SAS
 #   Fig4_theil_temporal.jpg    descomposición de Theil a lo largo de ocho eras
 #   Fig5_shift_share.jpg       diferencial provincial del shift-share

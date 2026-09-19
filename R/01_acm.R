@@ -1,7 +1,7 @@
-# 01_acm.R — Geometría del espacio de formas jurídicas
+# 01_acm.R — Geometría del espacio de las organizaciones
 # ============================================================================
 # Construye el espacio sobre dos variables activas, la forma jurídica y la
-# sección de actividad, y analiza las subnubes por tipo de provincia y era
+# sección de actividad, y analiza las subnubes por región y era
 # dentro del marco de referencia global, siguiendo a Le Roux y Rouanet (2004,
 # cap. 4).
 #
@@ -22,7 +22,7 @@
 #   acm_valores_propios.csv    valores propios brutos y tasas modificadas
 #   acm_categorias.csv         coordenadas, contribuciones, cos2 y v-test
 #   acm_perfiles.csv           perfiles únicos con pesos y coordenadas
-#   acm_suplementarias.csv     baricentros de era, estado, tipo de provincia y
+#   acm_suplementarias.csv     baricentros de era, estado, región y
 #                              las 24 jurisdicciones
 #   acm_jurisdicciones_era.csv baricentro de cada jurisdicción en cada era
 #   acm_subnubes.csv           centroides, inercias y separaciones por subnube
